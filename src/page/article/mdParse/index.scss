@@ -1,0 +1,40 @@
+.MDWrap{
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex: 1;
+    padding-left: 305px;
+    overflow: hidden;
+    word-wrap: break-word;
+    .ant-dropdown-trigger{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+    }
+    .markdown-navigation{
+        position: fixed;
+        top: 150px;
+        right: 0;
+        width: 260px;
+        height: 60vh;
+        overflow-y: scroll;
+        box-shadow: 0 20px 5px rgba(0,0,0,.03), 0 6px 6px rgba(0,0,0,.05);
+        transition: all 1s cubic-bezier(.25,.8,.25,1);
+        background-color: #fff;
+        z-index: 999;
+    }
+    .content{
+        box-sizing: border-box;
+        width: 100%;
+        padding-right: 270px;
+        
+    }
+}
+.ant-dropdown{
+    height: 500px;
+    overflow: auto;
+}
+
+pre{
+    padding: 0!important;
+}

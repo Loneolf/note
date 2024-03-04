@@ -1,0 +1,1 @@
+{"version":3,"file":"style/home_8abbfa6986f26bdc18ab.css","mappings":"AAAA,wBACI,SAAU,CACV,mBAAS,CAAT,mBAAS,CAAT,YAAa","sources":["webpack://source-map/./src/page/home/index.scss"],"sourcesContent":[".homeTitle{\n    color: red;\n    display: flex;\n}"],"names":[],"sourceRoot":""}

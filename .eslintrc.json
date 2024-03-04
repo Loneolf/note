@@ -1,0 +1,19 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "NODE_ENV": "production"
+    },
+    "extends": "react-app",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "import/no-import-module-exports": 0,
+        "import/extensions": 0,
+        "import/no-extraneous-dependencies": 0,
+        "no-console": 0
+    }
+}

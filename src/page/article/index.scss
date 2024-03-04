@@ -1,0 +1,13 @@
+.articleWrap{
+    display: flex;
+    // color: #00b96b;
+    .menuWrap{
+        position: fixed;
+        top: 80px;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        background-color: #fff;
+        z-index: 999;
+    }
+}
