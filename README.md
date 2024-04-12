@@ -1,2 +1,1 @@
-# static-web-test
-github静态测试网站
+# 个人博客项目
