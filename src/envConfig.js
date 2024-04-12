@@ -1,0 +1,1 @@
+export const envConfig = {"nodeEnv":"development","buildType":"Browser"}
