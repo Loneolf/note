@@ -30,10 +30,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Build
-      run: |
-        npm install
-        npm run gitBuild
+    # - name: Build
+    #   run: |
+    #     npm install
+    #     npm run gitBuild
     - name: Commit and push
       run: |
         git config --global user.email "qinghaoqin@163.com"
