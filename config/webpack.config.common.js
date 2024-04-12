@@ -49,6 +49,8 @@ module.exports = {
 			'@': path.resolve(__dirname, '../src'),
 			'@s': path.resolve(__dirname, '../src/store'),
 			'@m': path.resolve(__dirname, '../src/mds'),
+			'@u': path.resolve(__dirname, '../src/util'),
+			'@c': path.resolve(__dirname, '../src/componet'),
 		},
 	},
 	optimization: {

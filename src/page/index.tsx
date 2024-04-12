@@ -17,7 +17,8 @@ function App() {
                     <li><Link to="/article">文章</Link></li>
                     <li><Link to="/nav">案例</Link></li>
                     <li><Link to="/reduce">游戏</Link></li>
-                    {/* <li><Link to="/test">测试@练习</Link></li> */}
+                    <li><Link to="/reduce">工具</Link></li>
+                    <li><Link to="/test">测试@练习</Link></li>
                 </ul>
             </header>
                 <Suspense fallback={<Spin />}>

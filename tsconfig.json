@@ -24,7 +24,9 @@
     "paths": {
       "@/*": ["src/*"],
       "@s/*":["src/store/*"],
-      "@m/*":["src/mds/*"]
+      "@m/*":["src/mds/*"],
+      "@u/*":["src/util/*"],
+      "@c/*":["src/componet/*"],
     },
   },
   "include": [

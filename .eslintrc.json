@@ -1,8 +1,7 @@
 {
     "env": {
         "browser": true,
-        "es2021": true,
-        "NODE_ENV": "production"
+        "es2021": true
     },
     "extends": "react-app",
     "parserOptions": {

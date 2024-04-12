@@ -17,7 +17,7 @@ module.exports = {
 	plugins: [
 		new MiniCssExtractPlugin({
 			// 默认生成main.css
-			filename: "style/[name]_[contenthash].css", // 生成的文件放在dest/style目录下，文件名为hash值
+			filename: "style/[name]_[contenthash:6].css", // 生成的文件放在dest/style目录下，文件名为hash值
 		}),
 		new CopyPlugin({
 			patterns: [
@@ -40,13 +40,13 @@ module.exports = {
 					MiniCssExtractPlugin.loader,
 					{
 						loader: "css-loader",
-						options: {
-							modules: {
-								localIdentName:
-									"[name]_[local]_[hash:base64:6]",
-							},
-							importLoaders: 2,
-						},
+						// options: {
+						// 	modules: {
+						// 		localIdentName:
+						// 			"[name]_[local]_[hash:base64:6]",
+						// 	},
+						// 	importLoaders: 2,
+						// },
 					},
 					{
 						loader: "postcss-loader",
