@@ -33,7 +33,7 @@ jobs:
     - name: Build
       run: |
         npm install
-        npm run build
+        npm run gitBuild
     - name: Commit and push
       run: |
         git config --global user.email "qinghaoqin@163.com"

@@ -9,6 +9,7 @@
     "dev": "cross-env NODE_ENV=development webpack serve --config ./config/webpack.config.js",
     "testBuild": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js && npm run testUpload",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js && npm run upLoad",
+    "gitBuild": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js",
     "testUpload": "cross-env NODE_ENV=test node ./src/util/upCDN.js",
     "upLoad": "node ./src/util/upCDN.js",
     "tsi": "tsc --init"
