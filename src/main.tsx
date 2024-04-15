@@ -4,7 +4,7 @@ import { BrowserRouter, HashRouter } from "react-router-dom";
 import zhCN from "antd/locale/zh_CN";
 import { ConfigProvider } from "antd";
 import { Provider } from "react-redux";
-import {envConfig} from "./envConfig";
+import {envConfig} from "./config/envConfig";
 import store from "./store";
 import App from "./page";
 import "./assets/css/reset.scss";

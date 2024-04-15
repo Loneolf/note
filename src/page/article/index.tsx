@@ -3,6 +3,7 @@ import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import MdParse from "@c/mdParse";
 import { mdCatalog } from '@m/mdCatalog'
+import eventBus from '@u/eventBus'
 
 import "./index.scss";
 
@@ -13,7 +14,7 @@ export default function Artical() {
 		console.log('aaamenuClick', keyPath)
 		const path = keyPath.reverse().join('/')
 		setMdPath(path)
-		console.log('aaa232323')
+		eventBus.emit('')
 	}
 
 	return (

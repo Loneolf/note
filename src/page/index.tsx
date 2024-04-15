@@ -6,6 +6,7 @@ import './index.scss'
 const Article= lazy(() => import(/* webpackChunkName: 'article' */ "./article"));
 const Nav = lazy(() => import(/* webpackChunkName: 'nav' */ "./nav"));
 const Reduce = lazy(() => import(/* webpackChunkName: 'reduce' */ "./reduce"));
+const Tools = lazy(() => import(/* webpackChunkName: 'Tools' */ "./tool"));
 
 function App() {
 	
@@ -17,7 +18,7 @@ function App() {
                     <li><Link to="/article">文章</Link></li>
                     <li><Link to="/nav">案例</Link></li>
                     <li><Link to="/reduce">游戏</Link></li>
-                    <li><Link to="/reduce">工具</Link></li>
+                    <li><Link to="/tools">工具</Link></li>
                     <li><Link to="/test">测试@练习</Link></li>
                 </ul>
             </header>
@@ -28,6 +29,7 @@ function App() {
                             <Route path="/article" element={<Article />}></Route>
                             <Route path="/nav" element={<Nav />}></Route>
                             <Route path="/reduce" element={<Reduce />}></Route>
+                            <Route path="/tools" element={<Tools />}></Route>
                         </Routes>
                     </main>
                 </Suspense>

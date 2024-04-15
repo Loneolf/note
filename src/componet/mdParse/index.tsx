@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MarkDown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"; // 代码高亮显示
 import remarkGfm from "remark-gfm";
@@ -25,6 +25,7 @@ export default function MdParse({ sourceSrc }: { sourceSrc: string }) {
 	const [theme, setTheme] = useState(dfTheme.theme);
 	const [sourceMd, setSourceMd] = useState("");
 	const [titles, setTitles] = useState<Title[]>([]);
+	const mainConent = useRef<HTMLDivElement>(null)
 	let navWrap:HTMLDivElement | null =null
 	let activeNav:HTMLDivElement | null =null
 	let navWrapHeight: number
@@ -56,6 +57,7 @@ export default function MdParse({ sourceSrc }: { sourceSrc: string }) {
 		.catch(() => {
 			console.log("aaaaerrror");
 		});
+		document.body.scrollIntoView(true)
 	}, [sourceSrc]);
 
 	function scrollHandle(e:Event) {
@@ -192,11 +194,11 @@ export default function MdParse({ sourceSrc }: { sourceSrc: string }) {
 						affix={false}
 						onClick={handleClickNavItem}
 						items={titles}
-						offsetTop={80}
+						offsetTop={100}
 					></Anchor>
 				</aside>
 			)}
-			<div className="content markdown-body">
+			<div className="content markdown-body" id='content' ref={mainConent}>
 				{sourceMd && (
 					<MarkDown
 						children={sourceMd}

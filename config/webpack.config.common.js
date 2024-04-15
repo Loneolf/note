@@ -41,6 +41,17 @@ module.exports = {
 				test: /\.md$/,
 				use: "raw-loader",
 			},
+			{
+				test: /\.html$/,
+				use: [
+						{
+							loader: require.resolve('html-loader'),
+							options: {
+								minimize: true // 对HTML文件进行压缩
+							}
+						}
+					]
+			},
 		],
 	},
 	resolve: {

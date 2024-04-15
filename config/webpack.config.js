@@ -10,14 +10,12 @@ const envConfig = {
   nodeEnv: process.env.NODE_ENV,
   buildType: process.env.buildType
 }
-fs.writeFile(
-  path.resolve(__dirname, "../src/envConfig.js"),
-  `export const envConfig = ${JSON.stringify(envConfig)}`,
+fs.writeFile(path.resolve(__dirname, "../src/config/envConfig.js"), `export const envConfig = ${JSON.stringify(envConfig)}`,
   (error) => {
     if (error) {
-      console.log("写入文件错误", error);
+      console.log("写入环境变量错误", error);
     } else {
-      console.log("写入文件成功");
+      console.log("写入环境变量成功");
     }
   }
 );

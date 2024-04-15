@@ -13,13 +13,13 @@ export const throttle = (func: Function, delay: number = 1000) => {
 }
 
 // 防抖函数
-function debounce(func: Function, delay: number) {
+export function debounce(func: Function, delay: number) {
 	let debounceTimer: NodeJS.Timeout;
-	return function(...args: any[]) {
-	  clearTimeout(debounceTimer);
-	  debounceTimer = setTimeout(() => {
-		// @ts-ignore
-		func.apply(this, args);
-	  }, delay);
+	return function (...args: any[]) {
+		clearTimeout(debounceTimer);
+		debounceTimer = setTimeout(() => {
+			// @ts-ignore
+			func.apply(this, args);
+		}, delay);
 	};
-  }
+}
