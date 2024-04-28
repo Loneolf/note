@@ -4,6 +4,7 @@
     display: flex;
     flex: 1;
     padding-left: 305px;
+    padding-right:300px;
     overflow: hidden;
     word-wrap: break-word;
     .ant-dropdown-trigger{
@@ -42,12 +43,15 @@
         }
     }
     .content{
-        box-sizing: border-box;
         width: 100%;
-        padding-right: 280px;
-        padding: 20px 270px 20px 10px;
+        max-width: 760px;
+        margin: 0 auto;
+        padding:  32px 20px;
         
     }
+}
+.noAsideMDWrap{
+    padding-right: 0;
 }
 .ant-dropdown{
     height: 500px;

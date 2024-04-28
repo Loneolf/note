@@ -23,10 +23,15 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
+      "@a/*": ["src/assets/*"],
+      "@ac/*": ["src/assets/css/*"],
+      "@ai/*": ["src/assets/img/*"],
       "@s/*":["src/store/*"],
       "@m/*":["src/mds/*"],
       "@u/*":["src/util/*"],
       "@c/*":["src/componet/*"],
+      "@cf/*":["src/config/*"],
+      "@cl/*":["src/case/local/*"],
     },
   },
   "include": [

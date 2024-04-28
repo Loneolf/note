@@ -58,10 +58,15 @@ module.exports = {
 		extensions: [".tsx", ".ts", ".jsx", ".js", ".json"], // 自动补全文件扩展名，让tsx可以使用
 		alias: {
 			'@': path.resolve(__dirname, '../src'),
+			'@a': path.resolve(__dirname, '../src/assets'),
+			'@ac': path.resolve(__dirname, '../src/assets/css'),
+			'@ai': path.resolve(__dirname, '../src/assets/img'),
 			'@s': path.resolve(__dirname, '../src/store'),
 			'@m': path.resolve(__dirname, '../src/mds'),
 			'@u': path.resolve(__dirname, '../src/util'),
 			'@c': path.resolve(__dirname, '../src/componet'),
+			'@cf': path.resolve(__dirname, '../src/config'),
+			'@cl': path.resolve(__dirname, '../src/case/local'),
 		},
 	},
 	optimization: {

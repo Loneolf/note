@@ -5,7 +5,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw"; // 解析标签，支持html语法
 import { DownOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Dropdown, Space, Anchor } from "antd";
+import { Dropdown, Space, Anchor, FloatButton } from "antd";
 import { themeList, themeMap, initTheme, saveTheme } from "./theme";
 import "github-markdown-css";
 import "./index.scss";
@@ -18,7 +18,13 @@ type Title = {
 	nodeName: any;
 };
 
-export default function MdParse({ sourceSrc }: { sourceSrc: string }) {
+interface IMDProps {
+	sourceSrc: string;
+	isShowBackTop?: boolean;
+	isShowAside?: boolean;
+}
+
+export default function MdParse({ sourceSrc, isShowBackTop = true, isShowAside = true }: IMDProps) {
 	// 获取默认主题对应的文字和主题
 	const dfTheme = initTheme();
 	const [themeName, setThemeName] = useState(dfTheme.text);
@@ -169,7 +175,7 @@ export default function MdParse({ sourceSrc }: { sourceSrc: string }) {
 	};
 
 	return (
-		<div className="MDWrap">
+		<div className={`MDWrap ${titles.length > 0 ? '' : 'noAsideMDWrap'}`}>
 			<Dropdown
 				trigger={["click"]}
 				menu={{
@@ -184,7 +190,7 @@ export default function MdParse({ sourceSrc }: { sourceSrc: string }) {
 					<DownOutlined />
 				</Space>
 			</Dropdown>
-			{titles.length > 0 && (
+			{isShowAside && titles.length > 0 && (
 				<aside className="markdown-navigation">
 					<div className="navTitle">
 						目录
@@ -226,6 +232,7 @@ export default function MdParse({ sourceSrc }: { sourceSrc: string }) {
 						}}
 					/>
 				)}
+				{isShowBackTop && <FloatButton.BackTop />}
 			</div>
 		</div>
 	);

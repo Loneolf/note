@@ -1,38 +1,57 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import { Spin } from 'antd';
-import './index.scss'
+import { Spin } from "antd";
+import "./index.scss";
 
-const Article= lazy(() => import(/* webpackChunkName: 'article' */ "./article"));
-const Nav = lazy(() => import(/* webpackChunkName: 'nav' */ "./nav"));
+const Article = lazy(() => import(/* webpackChunkName: 'article' */ "./article"));
+const Fetch = lazy(() => import(/* webpackChunkName: 'fetch' */ "./fetch"));
 const Reduce = lazy(() => import(/* webpackChunkName: 'reduce' */ "./reduce"));
 const Tools = lazy(() => import(/* webpackChunkName: 'Tools' */ "./tool"));
+const Game = lazy(() => import(/* webpackChunkName: 'Game' */ "./game"));
+const Case = lazy(() => import(/* webpackChunkName: 'Case' */ "./case"));
+
+const RouterConfig = [
+	{ name: "文章", link: "/article" },
+	{ name: "案例", link: "/case" },
+	{ name: "游戏", link: "/game" },
+	{ name: "工具", link: "/tools" },
+	{ name: "reduce", link: "/reduce" },
+	{ name: "测试@练习", link: "/fetch" },
+];
 
 function App() {
-	
+	const [activeLink, setActiveLink] = useState("/article");
 	return (
 		<div className="pageWrap">
-            <header className="title">
-                <h2>青竹&Loneolf</h2>
-                <ul className="navList">
-                    <li><Link to="/article">文章</Link></li>
-                    <li><Link to="/nav">案例</Link></li>
-                    <li><Link to="/reduce">游戏</Link></li>
-                    <li><Link to="/tools">工具</Link></li>
-                    <li><Link to="/test">测试@练习</Link></li>
-                </ul>
-            </header>
-                <Suspense fallback={<Spin />}>
-                    <main className="main">
-                        <Routes>
-                            <Route path="/" element={<Article />}></Route>
-                            <Route path="/article" element={<Article />}></Route>
-                            <Route path="/nav" element={<Nav />}></Route>
-                            <Route path="/reduce" element={<Reduce />}></Route>
-                            <Route path="/tools" element={<Tools />}></Route>
-                        </Routes>
-                    </main>
-                </Suspense>
+			<header className="title">
+				<h2>青竹&Loneolf</h2>
+				<ul className="navList">
+					{RouterConfig.map((item) => {
+						return (
+							<li
+								onClick={() => setActiveLink(item.link)}
+								key={item.name}
+                                className={activeLink === item.link ? 'activeLi' : ''}
+							>
+								<Link to={item.link}>{item.name}</Link>
+							</li>
+						);
+					})}
+				</ul>
+			</header>
+			<Suspense fallback={<Spin />}>
+				<main className="main">
+					<Routes>
+						<Route path="/" element={<Article />}></Route>
+						<Route path="/article" element={<Article />}></Route>
+						<Route path="/fetch" element={<Fetch />}></Route>
+						<Route path="/case" element={<Case />}></Route>
+						<Route path="/game" element={<Game />}></Route>
+						<Route path="/tools" element={<Tools />}></Route>
+						<Route path="/reduce" element={<Reduce />}></Route>
+					</Routes>
+				</main>
+			</Suspense>
 		</div>
 	);
 }

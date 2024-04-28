@@ -1,0 +1,21 @@
+.split{
+    width: 1px;
+    border-left: 1px solid #ccc;
+    cursor: ew-resize;
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    left: 300px;
+    z-index: 9999;
+
+}
+.splitShadow{
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 304px;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    z-index: 9998;
+}

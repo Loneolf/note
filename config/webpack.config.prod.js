@@ -54,11 +54,11 @@ module.exports = {
 					"sass-loader",
 				],
 			},
-			{
-				test: /\.jsx?$/,
-				include: path.resolve(__dirname, "../src"),
-				loader: "babel-loader",
-			},
+			// {
+			// 	test: /\.jsx?$/,
+			// 	include: path.resolve(__dirname, "../src"),
+			// 	loader: "babel-loader",
+			// },
 		],
 	},
 	optimization: {

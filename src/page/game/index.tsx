@@ -2,36 +2,38 @@ import React, { useState, useEffect } from "react";
 import { Menu } from "antd";
 import type { MenuProps } from "antd";
 import Split from '@c/split'
-import TurnCss from './toolItems/turnCss.html'
+import { remoteBaseUrl } from '@cf/common'
+import '@ac/contentCom.scss'
 import './index.scss'
 
 const toolItem = [
-	{ label: "css转化", key: "css转化.html" },
+	{ label: "贪吃蛇", key: "snake/index.html" },
 ]
 
-export default function Tool() {
+export default function Game() {
+	const [frameSrc, setFrameSrc] = useState(toolItem[0].key)
 	const [leftDom, setLeftDome] = useState<HTMLDivElement>();
 	const menuClick: MenuProps['onClick'] = function ({keyPath}) {
-		console.log('aaamenuClick', keyPath)
+		setFrameSrc(keyPath[0])
 	}
 
 	useEffect(() => {
-		setLeftDome(document.querySelector('.toolsWrap .menuWrap')! as HTMLDivElement)		
+		setLeftDome(document.querySelector('.gameWrap .menuWrap')! as HTMLDivElement)
 	}, [])
 
 	return (
-		<div className="toolsWrap contentWrap">
+		<div className="gameWrap contentWrap">
 			<div className="menuWrap">
 				<Menu
 					onClick={menuClick}
-					defaultSelectedKeys={['css转化.html']}
+					defaultSelectedKeys={[frameSrc]}
 					mode="inline"
 					items={toolItem}
 				/>
 			</div>
 			<Split leftDom={leftDom!} leftPostion={200}/>
 			<div className="content">
-				<iframe srcDoc={TurnCss}></iframe>
+				<iframe src={remoteBaseUrl + frameSrc}></iframe>
 			</div>
 		</div>
 	);

@@ -1,19 +1,23 @@
 const fs = require("fs");
 const path = require("path");
 const COS = require("cos-nodejs-sdk-v5");
-const { COSSECRET } = require("./myConfig");
+const { COSSECRET, bucket, region } = require("./myConfig");
 
 const cos = new COS({
 	SecretId: COSSECRET.id,
 	SecretKey: COSSECRET.key,
 });
-// 存储同名称
-const bucket = "qing-1258827329";
-const region = "ap-beijing";
+// 存储桶名称
+
 let cosDir = "note/";
-upDir = "docs";
+let upDir = "docs";
 if (process.env?.NODE_ENV === 'test') {
 	cosDir = 'testNote/'
+}
+
+if (process.env?.upType === 'case') {
+	cosDir = "case/"
+	upDir = "src/case/remote"
 }
 
 let arr = [];

@@ -1,0 +1,33 @@
+.caseWrap{
+    .operateBox{
+        margin-bottom: 10px;
+        text-align: right;
+        width: 100%;
+        button{
+            margin-right: 20px;
+        }
+    }
+    .mobileContent{
+        .operateBox{
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+    }
+    .iconBox{
+        text-align: right;
+        margin-top: 10px;
+        .iconfont{
+            font-size: 20px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+    }   
+}
+.ant-popover .ant-popover-inner{
+    padding: 5px;
+    .qrimg{
+        width: 100px;
+        height: 100px;
+    }
+}

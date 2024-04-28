@@ -13,7 +13,9 @@ module.exports = {
 	mode: "development",
 	devtool: "cheap-module-source-map",
 	plugins: [
-		new ReactRefreshWebpackPlugin()
+		new ReactRefreshWebpackPlugin({
+			overlay: false
+		})
 	],
 	devServer: {
 		client: {
@@ -60,19 +62,19 @@ module.exports = {
 					"sass-loader",
 				],
 			},
-			{
-				test: /\.jsx?$/,
-				// exclude: /node_modules/, // 排除node_modules中的库
-				include: path.resolve(__dirname, "../src"),
-				loader: "babel-loader",
-				options: {
-					cacheDirectory: true,
-					cacheCompression: false,
-					plugins: [
-						"react-refresh/babel", // 激活js的HMR
-					],
-				},
-			},
+			// {
+			// 	test: /\.jsx?$/,
+			// 	// exclude: /node_modules/, // 排除node_modules中的库
+			// 	include: path.resolve(__dirname, "../src"),
+			// 	loader: "babel-loader",
+			// 	options: {
+			// 		cacheDirectory: true,
+			// 		cacheCompression: false,
+			// 		plugins: [
+			// 			"react-refresh/babel", // 激活js的HMR
+			// 		],
+			// 	},
+			// },
 		],
 	},
 };

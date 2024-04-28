@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.querySelector("#app")!);
 root.render(
 	<Provider store={store}>
 		<ConfigProvider locale={zhCN}>
-			{envConfig.buildType === "Browser" ? (
+			{envConfig?.buildType === "Browser" ? (
 				<BrowserRouter basename={ process.env.NODE_ENV === "development" ? "" : "/note" }>
 					<App />
 				</BrowserRouter>
