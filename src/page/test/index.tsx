@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "@a/css/contentCom.scss";
-import Test from "@/case/remote/mobile/拖拽到指定答案位置.html";
+// import Test from "@/case/remote/mobile/拖拽到指定答案位置.html";
 
 export default function Fetch() {
 	useEffect(() => {
@@ -19,12 +19,12 @@ export default function Fetch() {
 			{isMobile ? (
 				<div className="mobileContent content">
 					<div className="mobileframebox">
-						<iframe srcDoc={Test}></iframe>
+						{/* <iframe srcDoc={Test}></iframe> */}
 					</div>
 				</div>
 			) : (
 				<div className="content">
-					<iframe srcDoc={Test}></iframe>
+					{/* <iframe srcDoc={Test}></iframe> */}
 				</div>
 			)}
 		</div>
