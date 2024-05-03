@@ -2,16 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Menu, Drawer, Popover, Button } from "antd";
 import type { MenuProps } from "antd";
 import Split from '@c/split'
-import { remoteBaseUrl } from '@cf/common'
 import { frameAddTouch, generateQR } from '@u/util'
-import { caseConfig } from '@/case/remote/dealCaseData'
+import { caseConfig } from './dealCaseData'
 import '@ac/contentCom.scss'
 import './index.scss'
-
-const caseItem = [
-	{ label: "奥黛丽赫本", key: "case/pc/Audrey_Hepburn/index.html" },
-	{ label: "通讯录侧边滑动", key: "case/mobile/通讯录侧边滑动/index.html" },
-]
 
 console.log('aaaa2333caseConfig' ,caseConfig)
 
@@ -34,6 +28,9 @@ export default function Case() {
 		generateQR(frameSrc).then((data)=> {
 			setQRimgSrc(data!)
 		})
+		if (frame.current && frameSrc.includes('mobile')) {
+			frameAddTouch(frame.current, true)
+		}
 	}, [])
 
 	const isMobileFrame = frameSrc.includes("mobile")
@@ -48,12 +45,15 @@ export default function Case() {
 					items={caseConfig}
 				/>
 			</div>
-			<Split leftDom={leftDom!} leftPostion={200} />
+			<Split leftDom={leftDom!} leftPostion={300} />
 			<div className={`${isMobileFrame ? "mobileContent" : ""} content`}>
 				<div className="operateBox">
 					{
 						!isMobileFrame && <>
 							<Button type="primary" onClick={() => frame.current?.requestFullscreen()}>全屏</Button>
+							<a href={frameSrc} target="_blank">
+								<Button type="primary">新开标签查看</Button>
+							</a>
 						</>
 					}
 					<Button type="primary" onClick={() => setOpen(true)}>案例介绍</Button>

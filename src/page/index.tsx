@@ -4,7 +4,7 @@ import { Spin } from "antd";
 import "./index.scss";
 
 const Article = lazy(() => import(/* webpackChunkName: 'article' */ "./article"));
-const Fetch = lazy(() => import(/* webpackChunkName: 'fetch' */ "./fetch"));
+const Test = lazy(() => import(/* webpackChunkName: 'test' */ "./test"));
 const Reduce = lazy(() => import(/* webpackChunkName: 'reduce' */ "./reduce"));
 const Tools = lazy(() => import(/* webpackChunkName: 'Tools' */ "./tool"));
 const Game = lazy(() => import(/* webpackChunkName: 'Game' */ "./game"));
@@ -16,7 +16,7 @@ const RouterConfig = [
 	{ name: "游戏", link: "/game" },
 	{ name: "工具", link: "/tools" },
 	{ name: "reduce", link: "/reduce" },
-	{ name: "测试@练习", link: "/fetch" },
+	{ name: "测试@练习", link: "/test" },
 ];
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Article />}></Route>
 						<Route path="/article" element={<Article />}></Route>
-						<Route path="/fetch" element={<Fetch />}></Route>
+						<Route path="/test" element={<Test />}></Route>
 						<Route path="/case" element={<Case />}></Route>
 						<Route path="/game" element={<Game />}></Route>
 						<Route path="/tools" element={<Tools />}></Route>

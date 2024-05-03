@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>定时闹钟，自定义</title>
+    <style>
+      .closeClock,
+      .beforeClose {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="inputbox">
+      <label for="inputTime">请输入倒计时时间:</label>
+      <input
+        class="inputTime"
+        id="inputTime"
+        type="text"
+        placeholder="请输入倒计时时间"
+        value="0.03"
+      />
+      <span>剩余时间：</span>
+      <span class="count"></span>
+    </div>
+    <div class="selectUnit"></div>
+    <div>
+      <button class="sureButton">确定</button>
+      <button class="beforeClose">提前关闭</button>
+      <button class="closeClock">关闭闹钟</button>
+    </div>
+
+    <audio
+      class="alartMusic"
+      src="./12681.mp3"
+      controls="controls"
+      preload
+      id="alartMusic"
+      hidden
+    />
+
+    <script>
+      let timeInput = document.querySelector(".inputTime");
+      let button = document.querySelector(".sureButton");
+      let count = document.querySelector(".count");
+      let audio = document.querySelector(".alartMusic");
+      let closeClock = document.querySelector(".closeClock");
+      let beforeClose = document.querySelector(".beforeClose");
+      let intervalTime;
+
+      button.addEventListener("click", clickHandle);
+      closeClock.addEventListener("click", audioInit);
+      beforeClose.addEventListener("click", audioInit);
+      timeInput.addEventListener("keydown", keyDownHandle);
+
+      function keyDownHandle(e) {
+        if (e.key === "Enter") clickHandle();
+      }
+
+      function clickHandle() {
+        let time = timeInput.value;
+        let frontNum = 0,
+          backNum = 0;
+        if (time.indexOf(".")) {
+          let temArr = time.split(".");
+          frontNum = Number(temArr[0]);
+          backNum = Number(temArr[1]);
+        } else {
+          frontNum = Number(time);
+        }
+
+        allTime = (frontNum * 60 + backNum) * 1000;
+
+        let endTime = Date.now() + allTime;
+        if (intervalTime) clearInterval(intervalTime);
+        intervalTime = setInterval(() => {
+          if (Date.now() > endTime) {
+            music();
+            clearInterval(intervalTime);
+          } else {
+            count.innerHTML = getCountTime(endTime);
+          }
+        }, 200);
+        beforeClose.style.display = "block";
+      }
+
+      function getCountTime(endTime) {
+        let allSeconed = Math.floor((endTime - Date.now()) / 1000);
+        let seconed = allSeconed % 60;
+        if (seconed < 10) seconed = "0" + seconed;
+        return `${parseInt(allSeconed / 60)}:${seconed}`;
+      }
+
+      function music() {
+        closeClock.style.display = "block";
+        audio.play();
+      }
+
+      function audioInit() {
+        audio.pause();
+        audio.currentTime = 0;
+        beforeClose.style.display = "none";
+        closeClock.style.display = "none";
+      }
+    </script>
+  </body>
+</html>

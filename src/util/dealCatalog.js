@@ -10,7 +10,7 @@ const config = {
 	},
 	case: {
 		path: '../case/remote',
-		outFile: '../case/remote/caseCatalog.js',
+		outFile: '../page/case/caseRemoteCatalog.js',
 		outName: 'caseCatalog',
 		fileType: '.html'
 	}
