@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旋转照片</title>
+  <style>
+    body,html{
+      width: 100%;
+      /* height: 100%; */
+      background: #eee;
+      box-sizing: border-box;
+      height: 7000px;
+    }
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    ul{
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      margin: 200px auto;
+      left: 0;
+      right: 0;
+      background: #999;
+      perspective: 1000px;
+    }
+    li{
+      --ang: -180deg;
+      position: absolute;
+      top: 0;
+      left: 0;
+      list-style: none;
+      height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      border: 6px solid #ccc;
+      border-radius: 4px;
+      transform: rotateY(var(--ang));
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+    img{
+      width: 500px;
+    }
+    div{
+      --left23: 0;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: green;
+      left: var(--left);
+    }
+  </style>
+</head>
+<body>
+  <div style="--left:50px"></div>
+  <ul>
+    <li><img src="./img/1.jpg" /></li>
+    <li><img src="./img/2.jpg" /></li>
+    <li><img src="./img/3.jpg" /></li>
+    <li><img src="./img/4.jpg" /></li>
+    <li><img src="./img/5.jpg" /></li>
+    <li><img src="./img/6.jpg" /></li>
+    <li><img src="./img/7.jpg" /></li>
+    <li><img src="./img/8.jpg" /></li>
+    <li><img src="./img/9.jpg" /></li>
+  </ul>
+  <script>
+    let body = document.querySelector('body')
+    let lis = document.querySelectorAll('li')
+    let TscrollHandle = throttle(scrollHandle, 20)
+    window.addEventListener('scroll', TscrollHandle)
+    const s = (body.scrollHeight - window.innerHeight) / 8
+    function scrollHandle() {
+      lis.forEach((li, index) => {
+        const ang = (this.scrollY - (s * (index -1))) * 360 / (s * 2) - 180;
+        li.style.setProperty('--ang', Math.max(-180, Math.min(180, ang)) + 'deg')
+      })
+      
+    }
+
+    function throttle(fun, time) {
+      let off = true
+      return function (...args) {
+        if (!off) return
+        off = false
+        setTimeout(() => {
+          fun.apply(this, args)
+          off = true
+        }, time);
+      }
+    }
+  </script>
+</body>
+</html>

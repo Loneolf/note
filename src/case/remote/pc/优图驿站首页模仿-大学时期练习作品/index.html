@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优图驿站首页</title>
+    <link rel="shortcut icon" href="logo.ico"  />
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-2.1.1.js"></script>
+</head>
+<body>
+    <!-- 导航 -->
+    <div class="nav" id="nav">
+        <div class="nav-left">
+            <a href="#" class="nav-logo">
+                <img class="nav-logo-img" id="nav-logo-img" src="img/首页/logo-w.png" alt="">
+                <span>优图驿站</span>
+            </a>
+            <ul>
+                <li><a class="choose" href="#">首页</a></li>
+                <li><a href="#">素材</a></li>
+                <li><a href="#">服务</a></li>
+                <li><a href="#">购物</a></li>
+                <li><a href="#">更多</a></li>
+            </ul>
+        </div>
+        <div class="nav-input" id="nav-input">
+            <input type="text" placeholder="搜索你喜欢的">
+            <button></button>
+        </div>
+        <div class="nav-right">
+            <a class="login" id="login" href="#">登录</a>
+            <a class="register" id="register" href="#">注册</a>
+        </div>
+    </div>
+    <!-- 蒙版 -->
+    <div class="login-father" id="login-father"></div>
+    <!-- 登录板块 -->
+    <div class="login-box" id="login-box">
+        <div class="close" id="login-close"></div>
+        <div class="login-content">
+            <div class="login-logo">
+                <img src="img/首页/logo-com.png" alt="">
+            </div>
+            <div class="login-p">
+                <p>使用第三方账号登录</p>
+            </div>
+            <div class="login-other">
+                <a href="#" title="微博账号登录" class="weibo"></a>
+                <a href="#" title="QQ账号登录" class="QQ"></a>
+                <a href="#" title="微信账号登录" class="weixin"></a>
+                <a href="#" title="豆瓣账号登录" class="douban"></a>
+                <a href="#" title="人人账号登录" class="renren"></a>
+            </div>
+            <div class="login-p">
+                <p>使用手机号/邮箱登录</p>
+            </div>
+            <input type="text" placeholder="输入手机号或邮箱">
+            <input type="password" placeholder="密码">
+            <button>登录</button>
+            <div class="last-line">
+                <a href="#">忘记密码>></a>
+                <span>还没有优图账号?</span>
+                <a href="#" id="login-a">点击注册>></a>
+            </div>
+        </div>
+        
+    </div>
+    <!-- 注册板块 -->
+    <div class="register-box" id="register-box">
+            <div class="close" id="register-close"></div>
+            <div class="register-content">
+                <div class="register-logo">
+                    <img src="img/首页/logo-com.png" alt="">
+                </div>
+                <div class="register-p">
+                    <p>使用第三方账号注册优图</p>
+                </div>
+                <div class="register-other">
+                    <a href="#" title="微博账号登录" class="weibo"></a>
+                    <a href="#" title="QQ账号登录" class="QQ"></a>
+                    <a href="#" title="微信账号登录" class="weixin"></a>
+                    <a href="#" title="豆瓣账号登录" class="douban"></a>
+                </div>
+                <a class="phone-reg" href="#">使用手机号注册</a>
+                <div class="last-line">
+                    <span>已有账号?</span>
+                    <a href="#" id="register-a">登录到优图>></a>
+                </div>
+            </div>
+    </div>
+    <!-- 头部搜索部分 -->
+    <div class="head-banner" id="head-banner">
+        <div class="head-banner-box">
+            <p class="head-banner-p">优图驿站，陪你做生活的设计师</p>
+            <div class="head-input">
+                <input type="text" placeholder="搜索你喜欢的">
+                <button></button>
+            </div>
+            <div class="head-rec">
+                <span>热门搜索:</span>
+                <a href="#">双十一素材</a>
+                <a href="#">创意合成</a>
+                <a href="#">壁纸那些事</a>
+            </div>
+        </div>
+    </div>
+    <!-- 轮播图板块 -->
+    <div class="carousel" id="carousel">
+        <div class="carousel-title" >
+            <p>大家正在关注</p>
+        </div>
+        <div class="carousel-box" id="carousel-box">
+            <div class="carousel-box1 carousel-allbox">
+                <a href="#"><img src="img/首页/1.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/2.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/3.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/4.jpg" alt=""></a>
+            </div>
+            <div class="carousel-box2 carousel-allbox">
+                <a href="#"><img src="img/首页/5.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/6.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/7.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/8.jpg" alt=""></a>
+            </div>
+            <div class="carousel-box3 carousel-allbox">
+                <a href="#"><img src="img/首页/9.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/10.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/11.jpg" alt=""></a>
+                <a href="#"><img src="img/首页/12.jpg" alt=""></a>
+            </div>
+            <div class="btn-left btn">&lt;</div>
+            <div class="btn-right btn">&gt;</div>
+            <ul class="list" id="list">
+                <li class="list-choose"></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 图片板块 -->
+    <div class="content" id="content">
+        <div class="content-title" >
+            <p id="recommend">为您推荐+(点击出现彩蛋)</p>
+        </div>
+        <div class="contentBox" id="contentBox"></div>
+        <div class="content-p" id="content-p">
+            <p id="contentP">加载更多</p>
+        </div>
+    </div>
+    
+    <!-- 分类采集板块 -->
+    <div class="gether" id="gether">
+        <p class="gether-p">以分类浏览优图驿站</p>
+        <div class="gether1 getherDiv">
+            <a href="#gether">UI/UX</a>
+            <a href="#gether">平面</a>
+            <a href="#gether">插画/漫画</a>
+            <a href="#gether">家居/家装</a>
+            <a href="#gether">女装/搭配</a>
+            <a href="#gether">男士/风尚</a>
+        </div>
+        <div class="gether1 getherDiv">
+            <a href="#gether">工业设计</a>
+            <a href="#gether">摄影</a>
+            <a href="#gether">造型/美妆</a>
+            <a href="#gether">美食</a>
+            <a href="#gether">旅行</a>
+            <a href="#gether">手工/布艺</a>
+        </div>
+        <div class="gether1 getherDiv">
+            <a href="#gether">UI/UX</a>
+            <a href="#gether">平面</a>
+            <a href="#gether">插画/漫画</a>
+            <a href="#gether">家居/家装</a>
+            <a href="#gether">女装/搭配</a>
+            <a href="#gether">男士/风尚</a>
+        </div>
+        <div class="gether1 getherDiv">
+            <a href="#gether">UI/UX</a>
+            <a href="#gether">平面</a>
+            <a href="#gether">插画/漫画</a>
+            <a href="#gether">家居/家装</a>
+            <a href="#gether">女装/搭配</a>
+            <a href="#gether">男士/风尚</a>
+        </div>
+        <div class="gether1 getherDiv">
+            <a href="#gether">UI/UX</a>
+            <a href="#gether">平面</a>
+            <a href="#gether">插画/漫画</a>
+            <a href="#gether">家居/家装</a>
+            <a href="#gether">女装/搭配</a>
+            <a href="#gether">男士/风尚</a>
+        </div>
+        
+    </div>
+    <!-- 尾部板块 -->
+    <div class="foot" id="foot">
+        <ul>
+            <li><a href="#foot">优图首页</a></li>
+            <li><a href="#foot">优图采集工具</a></li>
+            <li><a href="#foot">优图官方微博</a></li>
+            <li><a href="#foot">违规有害信息举报</a></li>
+        </ul>
+        <ul>
+            <li><a href="#foot">练习与合作</a></li>
+            <li><a href="#foot">联系我们</a></li>
+            <li><a href="#foot">用户反馈</a></li>
+            <li><a href="#foot">优图LOGO标准文档</a></li>
+        </ul>
+        <ul>
+            <li><a href="#foot">移动客户端</a></li>
+            <li><a href="#foot">优图iPhone版</a></li>
+            <li><a href="#foot">优图Android版</a></li>
+            <li><a href="#foot">优图HD</a></li>
+        </ul>
+        <ul>
+            <li><a href="#foot">关注我们</a></li>
+            <li><a href="#foot">新浪微博:@优图驿站网</a></li>
+            <li><a href="#foot">联系客服</a></li>
+            <li><a href="#foot">官方微信<img id="foot-min-img" src="img/首页/about_footer_code.png" alt=""></a></li>
+            <img class="foot-ul-img" id="foot-ul-img" src="img/首页/code.jpg" alt="">
+        </ul>
+    </div>
+    <!-- 返回顶部板块 -->
+    <div class="return-all">
+        <!-- 返回顶部 -->
+        <div class="return" id="return">
+            <p class="return-p" id="return-p">回到顶部</p>
+        </div>
+        <div class="help" id="help">
+            <ul class="help-ul" id="help-ul">
+                <li>帮助中心</li>
+                <li>用户反馈</li>
+                <li>人工客服</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/lunbo.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/nav.js"></script>
+</body>
+</html>

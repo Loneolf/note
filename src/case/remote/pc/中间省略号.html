@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中间省略号</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .test1 {
+      padding: 10px;
+      display: inline-block;
+      user-select: none;
+    }
+
+    .oprate {
+      position: absolute;
+      cursor: ew-resize;
+      width: 5px;
+      height: 30px;
+      background-color: aqua;
+      top: 10px;
+      left: 80%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="test1">故事的主角叫做阿尔特，是个伟大的美国公民，真正的美国人。
+    他爱美国胜过爱他自己的生命。所以当阿尔特在1783年独立战争中被一颗5.56毫米线膛弹击中心脏的时候，
+    他并不觉得痛苦。因为他相信自己这一生没有白过，血并没有白流，美国的未来是光明和自由的！
+    人民绝不会再被奴役，独立精神永远照耀十三州！就在阿尔特闭上眼睛五分钟后，他又醒了过来。
+    故事非常俗套，他穿越了，穿越到了2019年的美国。阿尔特看到了美国的高楼大厦，
+    车水马龙，繁荣昌盛。他很高兴，觉得美国真的像他们那代人预期的一样，
+    成为了最独立自由的国家。但好像有什么不太对劲，阿尔特觉得，有什么不太对劲。
+  </div>
+  <div class="oprate" id="oprate"></div>
+  <script>
+    let dom = document.querySelector('.test1');
+    let text = dom.innerText;
+    let oprate = document.querySelector('.oprate');
+    let leftPosition = document.documentElement.clientWidth * 0.8;
+    oprate.addEventListener('mousedown', mouseDown);
+
+    function mouseDown() {
+      document.addEventListener("mousemove", mouthMove);
+      document.addEventListener("mouseup", mouthUp);
+    }
+    function mouthMove(e) {
+      // console.log("aaaaamouthMove");
+      if (e.x > document.documentElement.clientWidth - 20 || e.x < 100) return;
+      oprate.style.left = e.x + "px";
+      leftPosition = e.x;
+      setTextMiddle(dom, text, e.x);
+    }
+    function mouthUp() {
+      // console.log("aaaamouthup");
+      document.removeEventListener("mousemove", mouthMove);
+      document.removeEventListener("mouseup", mouthUp);
+    }
+
+
+    setTextMiddle(dom, text, leftPosition);
+    // window.addEventListener('resize', resizeHandle);
+    function resizeHandle(e) {
+      setTextMiddle(dom, text, leftPosition);
+    }
+    // 头部固定个数省略号
+    function setText(dom, text, width) {
+      if (!dom || !text.trim()) return text;
+      dom.innerText = text;
+      if (dom.scrollWidth < width) return text;
+      let head = text.slice(0, 7);
+      let signArr = text.slice(7).split('');
+      for (let i = 0; i < signArr.length; i++) {
+        let temArr = signArr.slice(i).join('');
+        dom.innerText = `${head}...${temArr}`;
+        if (dom.scrollWidth < width) return dom.innerText;
+      }
+      return text;
+    }
+    // 中间省略号
+    function setTextMiddle(dom, text, width) {
+      if (!dom || !text.trim()) return text;
+      dom.innerText = text;
+      if (dom.scrollWidth < width) return text;
+      let signArr = text.split('');
+      let start = '', end = '';
+      for (let i = 0; i < signArr.length; i++) {
+        i % 2 ? start += signArr.shift() : end = signArr.pop() + end;
+        dom.innerText = `${start}...${end}`;
+        if (dom.scrollWidth >= width) return dom.innerText;
+      }
+      return text;
+    }
+
+  </script>
+</body>
+
+</html>

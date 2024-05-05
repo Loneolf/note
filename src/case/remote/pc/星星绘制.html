@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>画月亮与满天星</title>
+    <style>
+      html, body{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas class="myCanvas" id="myCanvas" width="600" height="600"></canvas>
+    <script>
+      let canvas = document.querySelector("#myCanvas");
+      let ctx = canvas.getContext("2d");
+      // drawMoon(ctx, 4, 300, 100, 100, 45, "red")
+      let arr = []
+      // drawStar(ctx, 100, 50, 400, 400, 180);
+      drawStar(ctx, 100, 50, 200, 200, 0);
+      function drawStar(ctx, R, r, x, y, rot) {
+        // R:大圆半径，r:小圆半径，x: x方向圆心位置 y: y方向圆心位置，rot:旋转角度
+        ctx.beginPath();
+        for (var i = 0; i < 5; i++) {
+          //因为正常计算Y轴是向上的，但是在canvas中Y轴是向下的，所以Y轴角度用负值
+          ctx.lineTo(
+            x + Math.cos(((18 + 72 * i - rot) / 180) * Math.PI) * R,
+            y - Math.sin(((18 + 72 * i - rot) / 180) * Math.PI) * R
+          );
+          ctx.lineTo(
+            x + Math.cos(((54 + 72 * i - rot) / 180) * Math.PI) * r,
+            y - Math.sin(((54 + 72 * i - rot) / 180) * Math.PI) * r
+          );
+        }
+        ctx.closePath();
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+        ctx.stroke();
+      }
+      function drawMoon(ctx, d, x, y, R, rot, fillColor) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(R, R);
+        ctx.rotate((Math.PI / 180) * rot);
+        MoonPath(ctx, d);
+        ctx.fillStyle = fillColor;
+
+        ctx.fill();
+        ctx.restore();
+      }
+      function MoonPath(ctx, d) {
+        ctx.beginPath();
+        ctx.arc(0, 0, 1, Math.PI * 0.5, Math.PI * 1.5, true); //绘制外面的弧
+        ctx.arcTo(d, 0, 0, 1, distance(0, -1, d, 0) / d); //绘制里面的弧
+      }
+      function distance(x1, y1, x2, y2) {
+        return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+      }
+    </script>
+  </body>
+</html>

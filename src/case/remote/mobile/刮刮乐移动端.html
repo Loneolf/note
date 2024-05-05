@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刮刮乐</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    html,body{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    img{
+      -webkit-user-drag: none;
+    }
+    .canvasbox{
+      position: absolute;
+      height: 120px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 120px;
+      z-index: 1;
+    }
+    .canvasBg{
+        background: url("../commonImg/scratchBg.png");
+        background-size: 100% 100%;
+    }
+    .canvasBg span{
+      display: inline-block ;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 120px;
+      font-size: 40px;
+    }
+    .scratchImg{
+      position: absolute;
+      top: 0;
+      z-index: 999;
+    }
+    canvas{
+      position: absolute;
+      z-index: 999;
+      border-radius: 7px;
+    } 
+  </style>
+</head>
+<body>
+  <div class="canvasbox" style='height:120px;'>
+    <div class="canvasBg" style='height:120px;width:260px'>
+      <span class="text">谢谢参与</span>
+      <!-- <img :src='img' /> -->
+    </div>
+    <canvas id="cv" width="260" height="120"></canvas>
+    <img id='cvImg' class="scratchImg" src='../commonImg/scratchImg.png' width="260" height="120" left="calc(50% - 130px)"/>
+  </div>
+  <script>
+    let cvImg = document.querySelector('#cvImg')
+    let cv = document.querySelector('#cv')
+    beginPain()
+    function beginPain() {
+      cvImg.addEventListener('touchstart', touchHandle)
+      ctx = cv.getContext("2d")
+      ctx.beginPath()
+      ctx.fillStyle="#F4A533"
+      ctx.fillRect(0,0,260, 120)
+      ctx.fillStyle="#FFE4B2"
+      ctx.font="22px Arial"
+      ctx.fillText('刮开新年运势',65,65)
+      ctx.globalCompositeOperation="destination-out"
+      ctx.beginPath()
+    }
+    function touchHandle(e) {
+      e.stopPropagation()
+      console.log(e, e.type)
+      if(e.type === 'touchstart') {
+        document.addEventListener("touchmove",touchHandle)
+        this.between = {x : e.touches[0].clientX, y: e.touches[0].clientY}
+        this.addEventListener("touchend",touchHandle)
+      }
+      if (e.type === 'touchmove') {
+        let touch = e.touches[0]
+        let x = touch.clientX - cv.offsetLeft
+        let y = touch.clientY - cv.parentElement.offsetTop
+        ctx.moveTo(x,y)
+        ctx.arc(x, y, 20, 0, Math.PI * 2, false)
+        ctx.fill()
+      }
+      if (e.type === 'touchend') {
+        isClear()
+        document.removeEventListener('touchmove', touchHandle)
+        cvImg.removeEventListener("touchend",touchHandle)
+      }
+    }
+    function isClear() {
+      let data = ctx.getImageData(0,0,cv.width,cv.height).data
+      let split = parseInt(data.length/100) 
+      let count = 0
+      for (let i = 0; i < data.length; i += split) {
+        if(data[i] === 0) count +=1        
+      }
+      if(count > 60) ctx.clearRect(0,0,cv.width,cv.height)
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./src/static/iconFont/iconfont.css">
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="600" style="transform-origin: 300px 300px;margin:50px auto;"></canvas>
+  <script>
+
+      Heart()
+      function Heart(){
+        console.log('aaa')
+        var ctx
+        var x
+        var y 
+        var t  //角度
+        var r  = 15  //半径
+        var a = Math.PI*2  
+        function heart(){
+            var myCanvas = document.getElementById('myCanvas')
+            ctx = myCanvas.getContext("2d")
+            myCanvas.style.background = "#000"
+            var timer = setInterval(function(){
+                a -= Math.PI/500
+                if(a<Math.PI*2&&a>0){
+                    draw(a)
+                }
+            },1*0.1)
+
+            var timer2 = setTimeout(function(){
+                var j = 10
+                var timer3 = setInterval(function(){
+                    j--
+                    if(j>0){
+                        for(var i =0;i<Math.PI*2;i += Math.PI * 0.001){
+                            draw(i,j*0.1,1)
+                        }
+                    }
+                },300)
+            },5000)
+        }
+        function draw(t,a,b){
+            ctx.fillStyle = "red"
+            ctx.save()
+            ctx.translate(300*(1-a),0)
+            ctx.scale(a,b)
+            ctx.fillRect(getX(t),getY(t),1,1)
+            ctx.restore()
+        }
+        function getX(t) {//由弧度得到 X 坐标  
+            return 300 + r * (16 * Math.pow(Math.sin(t), 3));  
+        }  
+        function getY(t) {//由弧度得到 Y 坐标  
+            return 300 - r * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));  
+        } 
+        heart()  
+        
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>不定高长列表渲染优化</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .boxWrap {
+      width: 500px;
+      height: 600px;
+      border: 1px solid #ccc;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 100px;
+      margin: auto;
+      overflow: auto;
+    }
+
+    .mainContent {
+      box-sizing: border-box;
+    }
+
+    .item {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      border-bottom: 1px solid #eee;
+      box-sizing: border-box;
+    }
+
+    .showInfoBox {
+      height: 300px;
+      width: 300px;
+      border: 1px solid #ccc;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 50px;
+      margin: auto;
+      overflow: auto;
+    }
+
+    .allShowItem,
+    .allDataLast {
+      word-break: break-all;
+    }
+  </style>
+  <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+</head>
+
+<body>
+  <div id="boxWrap" class="boxWrap">
+    <div id="mainContent" class="mainContent"></div>
+  </div>
+  <div class="showInfoBox">
+    <div id="clientHeight" class="clientHeight"></div>
+    <div id="scrollTop" class="scrollTop"></div>
+    <div id="scrollHeight" class="scrollHeight"></div>
+    <div id="allShowItem" class="allShowItem"></div>
+    <div id="allDataLast" class="allDataLast"></div>
+  </div>
+  <script>
+    let boxWrap = document.querySelector('.boxWrap')
+    let infoBox = document.querySelector('.showInfoBox')
+    let num = 0 // 数据内容
+    let loading = false // 是否在加载数据中
+    let allData = [] // 所有数据数组
+    let beforeShowData = []
+    let showData = [] // 要展示的数据数组
+    let showNum = 15 // 列表中要展示多少数据
+    let startIndex = 0 // 要展示的数据在总数据中的下标index
+    let paddingTop = 0 // 列表padding
+    let allHeight = 0 // 列表总高度
+    let scrollTime = 0
+    let t_scrollHandle = _.throttle(scrollHandle, 100, { leading: true })
+    boxWrap.addEventListener('scroll', t_scrollHandle)
+    // 初始化请求一次数据然后渲染
+    request().then((res) => {
+      if (Array.isArray(res)) {
+        allData = res
+        renderData(res, mainContent)
+      }
+    })
+
+    // 滚动事件，实时计算，渲染以及数据可视化
+    async function scrollHandle(e) {
+      scrollTime += 1
+      const { scrollTop: ST, scrollHeight: SH, clientHeight: CH } = e.target
+      detection(ST, SH, CH)
+      // isRequest()
+      calculate(ST, SH, CH)
+      if (showData.length && (showData.length < showNum)) {
+        let res = await request()
+        if (Array.isArray(res)){
+          allData = allData.concat(res)
+          renderData(res, mainContent)
+          return
+        }
+      }
+      renderData(showData, mainContent)
+    }
+
+    // 根据滚动值及其他值，计算开始元素的在列表中的下标，要展示的元素，以及列表的padding应该是多少
+    function calculate(ST, SH, CH) {
+      startIndex = dichotomy(ST)
+      // console.log(startIndex)
+      if (!~startIndex) return
+      beforeShowData = showData
+      showData = allData.slice(startIndex, startIndex + showNum)
+      // paddingTop = startIndex > 5 ? allData[(startIndex - 5)].offsetTop : 0
+      paddingTop = allData[startIndex].offsetTop
+    }
+
+    // 渲染数据,每次渲染先清空数据,设置顶部padding，然后将要展示的元素插入到列表盒子中
+    // 每条卡片，随机给个高度（模拟真实不定高卡片），然后存入卡片数据中，下次再渲染时，取该条数据
+    // 滚动条的总高度等于所有卡片的累计和
+    function renderData(list, parent, startCard) {
+      if (beforeShowData[0]?.value === list[0].value) return
+      let childrenArr = Array.from(parent.children)
+      let len = childrenArr.length
+      if (len) {
+        for (let i = 0; i < len; i++) {
+          childrenArr.pop().remove()
+        }
+      }
+      let fragment = document.createDocumentFragment()
+      parent.style.paddingTop = paddingTop + 'px'
+      list.forEach((item) => {
+        let div = document.createElement('div')
+        div.innerText = item.value
+        div.className = 'item'
+        if (!item.height) {
+          item.height = random(100, 200)
+          allHeight += item.height
+          item.offsetTop = allHeight - item.height
+        }
+        div.style.height = item.height + 'px'
+
+        fragment.appendChild(div)
+      });
+      parent.appendChild(fragment)
+      parent.style.height = allHeight + 'px'
+    }
+
+    // 二分法寻找当前滚动条所对应的卡片下标
+    // 因卡片高度不固定，无法使用固定高度计算对应卡片，可使用循环查找对应卡片，但当数组过长时，耗费性能，可使用二分法，加快查找速度
+    function dichotomy(ST) {
+      let low = 0, hgt = allData.length - 1
+      while (low <= hgt) {
+        let mid = parseInt((low + hgt) / 2)
+        let item = allData[mid]
+        // console.log(item, mid, low, hgt, ST, scrollTime)
+        if (ST > item.offsetTop && ST < item.offsetTop + item.height) return mid
+        else if (ST < item.offsetTop) hgt = mid -1
+        else if (ST > item.offsetTop + item.height) low = mid + 1
+        else return -1
+      }
+    }
+
+    // 随机数
+    function random(min, max) {
+      return parseInt(Math.random() * (max - min)) + min
+    }
+    // 数据可视化展示层 
+    function detection(ST, SH, CH) {
+      clientHeight.innerText = '元素clientHeight：' + CH
+      scrollTop.innerText = '当前滚动scrollTop：' + ST
+      scrollHeight.innerText = '当前滚动scrollHeight：' + SH
+      allShowItem.innerText = '渲染卡片：' + showData.map(item => item.value).join()
+      allDataLast.innerText = '最后二十条数据' + allData.slice(allData.length - 20).map(item => item.value).join()
+    }
+    // 是否请求数据
+    async function isRequest() {
+      
+    }
+    // 仿真请求
+    function request() {
+      if (loading) return
+      loading = true
+      return new Promise((res, rej) => {
+        console.log('aaa', '请求数据啦', Date.now(), loading)
+        setTimeout(() => {
+          let tem = []
+          for (let i = 0; i < 40; i++) {
+            tem.push({ value: num })
+            num += 1
+          }
+          loading = false
+          console.log(Date.now())
+          if (tem.length) res(tem)
+          else rej(new Error('数据请求出错'))
+        }, parseInt(Math.random() * 200) + 200);
+      })
+    }
+  </script>
+</body>
+
+</html>

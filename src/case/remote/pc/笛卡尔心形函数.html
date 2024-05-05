@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>笛卡尔心形函数</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    html,body{
+      width: 100%;
+      height: 100%;
+      background: rgb(7, 206, 241);
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    let t
+    let r = 15
+    let a = Math.PI * 2
+    let dotArr = []
+    let myCanvas = document.getElementById('myCanvas')
+    let ctx = myCanvas.getContext("2d")
+    ctx.strokeStyle = "#FFC0CB"
+    scale()
+    animation()
+    function animation(){
+      let timer = requestAnimationFrame(animation)
+      a -= Math.PI / 100
+      if (a < Math.PI * 2 && a > 0) {
+        draw(a)
+      } else {
+        cancelAnimationFrame(timer)
+      }
+    }
+    function draw(t) {
+      let dot = getDot(t)
+      dotArr.push(dot)
+      let len = dotArr.length - 1
+      if ( len === 0) return
+      ctx.moveTo (dotArr[len - 1].x, dotArr[len - 1].y)
+      ctx.lineTo (dotArr[len].x, dotArr[len].y)
+      ctx.lineWidth = 0.1
+      if (t < 1) ctx.lineWidth = 0.2
+      if (t < 0.5) ctx.lineWidth = 0.4
+      ctx.stroke()  
+      // ctx.save()
+      // ctx.restore()
+    }
+    //由弧度得到坐标  
+    function getDot(t) {
+      let x = 300 + r * (16 * Math.pow(Math.sin(t), 3))
+      let y = 300 - r * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t))
+      return { x, y }
+    }
+    function scale() {
+      if (['Windows', 'Mac', 'web'].includes(platformType())) {
+        myCanvas.style.margin = '50px 0'
+        Object.assign(document.querySelector('body').style, {
+          display: 'flex',
+          justifyContent: 'center'
+        })
+      } else {
+        let rate = document.documentElement.scrollWidth / myCanvas.scrollWidth
+        Object.assign(myCanvas.style, {
+          transform: `scale(${rate})`,
+          marginLeft: myCanvas.scrollWidth * (rate - 1) / 2 + 'px'
+        })
+      }
+    }
+    function platformType() {
+      const typeObj = {
+        iOS: /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent),
+        Android: /(Android)/i.test(navigator.userAgent),
+        Windows: /windows|win32/i.test(navigator.userAgent),
+        Mac: /macintosh|mac os x/i.test(navigator.userAgent),
+      }
+      for (let key in typeObj) {
+        if (typeObj[key]) return key
+      }
+      return "web"
+  };
+  </script>
+</body>
+
+</html>

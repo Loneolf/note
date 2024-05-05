@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/img-load.js"></script>
+    <script src="./js/zoomModule.js"></script>
+</head>
+<body>
+<script>
+    var arr=["little1.jpg","little2.jpg","little3.jpg","little4.jpg","little5.jpg","little6.jpg","little7.jpg",
+        "mid1.jpg","mid2.jpg","mid3.jpg","mid4.jpg","mid5.jpg","mid6.jpg","mid7.jpg",
+        "big1.jpg","big2.jpg","big3.jpg","big4.jpg","big5.jpg","big6.jpg","big7.jpg",
+    ]
+    LoadMethod.init(arr,"img/")
+    let zoom = new Zoom(document.body)
+</script>
+</body>
+</html>

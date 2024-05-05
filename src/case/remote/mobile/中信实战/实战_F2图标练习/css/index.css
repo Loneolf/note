@@ -1,0 +1,1273 @@
+body {
+  height: 100%;
+  width: 100%;
+  background: #f4f4f4;
+}
+
+.normal-red {
+  color: #DE2121 !important;
+}
+
+.normal-green {
+  color: #529C4F !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.textRight {
+  text-align: right !important;
+}
+
+/* 图表 */
+.tableChartCont {
+  overflow: hidden;
+}
+
+.tableChartCont .tableChart {
+  height: 0.88rem;
+  border-bottom: 0.01rem solid #E5E5E5;
+  font-size: 0.3rem;
+  line-height: 0.84rem;
+  text-align: center;
+}
+
+.tableChartCont .tableChart>li {
+  float: left;
+  width: 50%;
+  height: 100%;
+}
+
+.tableChartCont .tableChart .liTxt {
+  display: inline-block;
+  position: relative;
+  color: #777;
+}
+
+.tableChartCont .tableChart .liTxtBg {
+  font-weight: 500;
+  color: #222;
+}
+
+.tableChartCont .tableChart .liTxtLine {
+  position: absolute;
+  bottom: -0.06rem;
+  left: 50%;
+  width: 0.4rem;
+  height: 0.04rem;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background: #222;
+}
+
+.tableChartCont .chartCont {
+  position: relative;
+  overflow: hidden;
+}
+
+.tableChartCont .chartRelative {
+  position: relative;
+  overflow: hidden;
+}
+
+.tableChartCont .chartTitle {
+  overflow: hidden;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.24rem;
+  color: #777;
+}
+
+.tableChartCont .chartLeft {
+  float: left;
+}
+
+.tableChartCont .chartRight {
+  float: left;
+  margin-left: 0.3rem;
+}
+
+.tableChartCont .chartJT {
+  float: right;
+  width: 0.14rem;
+  height: 0.10rem;
+  margin: 0.08rem 0 0 0.1rem;
+  background: url('../img/sele.png') no-repeat;
+  background-size: 100% 100%;
+}
+
+.tableChartCont .chartTitleIco {
+  display: inline-block;
+  width: 0.16rem;
+  height: 0.16rem;
+  margin-top: 0.03rem;
+  background: #C8893B;
+  border-radius: 0.019rem;
+}
+
+.tableChartCont .chartTitleIco2 {
+  float: left;
+  width: 0.16rem;
+  height: 0.16rem;
+  margin-top: 0.03rem;
+  background: #7DAFF9;
+}
+
+.tableChartCont .chartTitleTxt {
+  float: left;
+  margin: 0 0.1rem;
+}
+
+.tableChartCont .chartTitleVal {
+  float: left;
+  color: #DE2121;
+}
+
+.tableChartCont .chart {
+  width: 100%;
+  height: 3.5rem;
+  overflow: hidden;
+}
+
+.tableChartCont .chartDate {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 0.8rem;
+  font-size: 0.26rem;
+  line-height: 0.8rem;
+  text-align: center;
+  color: #777777;
+  background: #FFFFFF;
+}
+
+.tableChartCont .chartDate>li {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  height: 100%;
+  border-top: 0.01rem solid #E5E5E5;
+  border-right: 0.01rem solid #E5E5E5;
+  font-family: PingFangSC-Regular;
+}
+
+.tableChartCont .chartDate .liBg {
+  border-top: 0.01rem solid #E5E5E5;
+  background: #FFEFD7;
+  font-family: PingFangSC-Medium;
+  font-size: 13px;
+  color: #B26F1C;
+  font-weight: 500;
+}
+
+.tableChartCont .chartDate>li:last-child {
+  border-right: none;
+}
+
+.tableChartCont .chartDate>li:last-child .charMore {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.tableChartCont .chartDate>li:last-child .charMoreTxt {
+  float: left;
+  content: '';
+}
+
+.tableChartCont .chartDate>li:last-child .charMore::after {
+  float: left;
+  width: 0.16rem;
+  height: 0.1rem;
+  margin-left: 0.04rem;
+  background: url('../img/down-tri.png') no-repeat;
+  background-size: 100% 100%;
+  content: '';
+}
+
+.tableChartCont .canvasCont {
+  position: relative;
+  overflow: hidden;
+}
+
+.tableChartCont .tips1 {
+  position: absolute;
+  top: 0.2rem;
+  bottom: 0.6rem;
+  left: 50%;
+  border-left: 0.02rem dashed #AAAAAA;
+  overflow: hidden;
+}
+
+.tableChartCont .tipsDate {
+  position: absolute;
+  bottom: 0.24rem;
+  left: 50%;
+  width: 1.4rem;
+  padding: 0.1rem 0;
+  border-radius: 0.06rem;
+  font-size: 0.2rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(255, 68, 0);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.tableChartCont .tipsDate1 {
+  position: absolute;
+  bottom: 0.20rem;
+  left: 50%;
+  width: 1.4rem;
+  padding: 0.1rem 0;
+  border-radius: 0.06rem;
+  font-size: 0.2rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(255, 68, 0);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.tableChartCont .tipsInfo {
+  width: 100%;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.24rem;
+  background: #FFF8F0;
+  font-family: PingFangSC-Regular;
+  font-size: 0.24rem;
+  color: #777777;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.green {
+  color: #529C4F;
+}
+
+.red {
+  color: #DE2121;
+}
+
+.tableChartCont .black {
+  color: #333;
+}
+
+.tableChartCont .top58 {
+  top: 0.2rem;
+}
+
+/* 蒙版 */
+.mask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+  z-index: 100;
+}
+
+.morePopCont {
+  position: fixed;
+  bottom: 0;
+  z-index: 101;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0.95rem;
+  text-align: center;
+  background: #fff;
+}
+
+.morePopCont .dateNav {
+  height: 0.95rem;
+  border-bottom: 0.01rem solid #f4f4f4;
+  font-size: 0.32rem;
+  color: #00161A;
+}
+
+.morePopCont .cancel {
+  border-top: 0.2rem solid #f4f4f4;
+  border-bottom: 0.2rem solid #f4f4f4;
+  font-size: 0.32rem;
+  color: #3D3D3D;
+}
+
+.morePopCont .red {
+  color: #DE2121;
+}
+
+.container {
+  /*height:100%;*/
+  overflow-y: scroll;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.fixed-header-wrap {
+  position: fixed;
+  z-index: 6999;
+  height: 1.28rem;
+  width: 100%;
+  top: 0;
+}
+
+.fixed-header-wrap.ios {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+}
+
+.fixed-header {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.28rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.fhw-bg {
+  height: 100%;
+  background-size: 7.5rem 1.76rem, auto;
+  background-position: bottom, top;
+  background-repeat: no-repeat, no-repeat;
+  width: 100%;
+  opacity: 1;
+}
+
+
+
+.fixed-back {
+  position: absolute;
+  float: left;
+  padding-left: 0.28rem;
+  width: 1.08rem;
+  height: 0.6rem;
+}
+
+.fixed-back img {
+  height: 0.6rem;
+  width: 0.6rem;
+}
+
+.fixed-title {
+  font-family: PingFangSC-Medium;
+  font-size: 0.36rem;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  font-weight: 500;
+  width: 100%;
+}
+
+.top-area {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 3.12rem;
+  z-index: 1;
+}
+
+.assets {
+  margin: 0 0.2rem;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+
+.total-assets {
+  padding-top: 0.26rem;
+  width: 100%;
+  text-align: center;
+  /* height: 1rem;
+  line-height: 0.5rem; */
+}
+
+/* .total-assets > div{
+  height: 0.42rem;
+  line-height: 0.42rem;
+} */
+
+.total-assets>div:first-child {
+  font-family: PingFangSC-Regular;
+  font-size: 0.28rem;
+  color: #777777;
+  text-align: center;
+  font-weight: 400;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  margin-bottom: 0.1rem;
+}
+
+.total-assets>div:last-child {
+  font-weight: bold;
+  font-size: 0.44rem;
+  color: #222222;
+  text-align: center;
+  font-weight: 500;
+  line-height: 0.44rem;
+  height: 0.44rem;
+  margin-bottom: 0.2rem;
+}
+
+
+.profits {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 1.2rem;
+}
+
+.profits>div {
+  width: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.profits>div>div:first-child {
+  font-family: PingFangSC-Regular;
+  font-size: 0.28rem;
+  /* color: #777777; */
+  text-align: center;
+  font-weight: 400;
+}
+
+.profits>div>div:last-child {
+  font-weight: bold;
+  font-size: 0.36rem;
+  /* color: #DE2121; */
+  text-align: center;
+  font-weight: 500;
+}
+
+.ljsy span {
+  display: inline-block;
+  width: 0.36rem;
+}
+
+.ljsy-wenhao {
+  width: 0.28rem;
+  vertical-align: text-bottom;
+  /* margin-left: 0.06rem; */
+}
+
+.commit-1 {
+  width: 100%;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 0.24rem;
+  color: #AAAAAA;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+.hot-recommend-title {
+  width: 100%;
+  position: relative;
+}
+
+.hot-recommend-title h1 {
+  font-family: PingFangSC-Medium;
+  font-size: 0.36rem;
+  font-weight: 500;
+  color: #333333;
+  margin-left: 4%;
+  padding-left: 0.28rem;
+  position: relative;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  letter-spacing: 0;
+}
+
+.hot-recommend-title h1:before {
+  content: '';
+  width: 0.08rem;
+  height: 0.28rem;
+  background: #C8893B;
+  position: absolute;
+  top: 0.3rem;
+  left: 0;
+}
+
+.hot-recommend-title img {
+  width: 0.28rem;
+}
+
+.hot-recommend-title span {
+  float: right;
+  padding-right: 0.3rem;
+  font-family: PingFangSC-Regular;
+  font-size: 0.24rem;
+  color: #777777;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+.syzs {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.profit-text {
+  padding: 0 0.3rem;
+  font-family: PingFangSC-Regular;
+  font-size: 0.24rem;
+  color: #777777;
+  font-weight: 400;
+}
+
+/* 中间区域 */
+.middle-area {
+  margin-top: 0.3rem;
+}
+
+.productsListTitle {
+  height: 0.92rem;
+  margin-top: 0.2rem;
+  padding: 0 0.2rem;
+}
+
+.productsListTitle .swiper-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  height: 0.92rem;
+}
+
+.productsListTitle .swiper-slide {
+  height: 0.8rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: #FFFFFF;
+  font-family: PingFangSC-Regular;
+  font-size: 0.3rem;
+  color: #999999;
+  text-align: center;
+  font-weight: 400;
+  border-radius: 0.16rem;
+}
+
+.productsListTitle .slide-active {
+  height: 0.92rem;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.productsListTitle .swiper-slide>div {
+  max-height: 0.8rem;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.productsListTitle .slide-active>div {
+  margin-top: -0.12rem;
+}
+
+
+
+.productsListTitle-one .swiper-slide {
+  width: 100%;
+  font-size: 0.3rem;
+}
+
+.productsListTitle-one .slide-active {
+  background: url(../img/tab-large.png) !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+
+.productsListTitle-two .swiper-slide {
+  width: 3.44rem;
+  line-height: 0.42rem;
+}
+
+.productsListTitle-two .slide-active {
+  background: url(../img/tab-middle.png) !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.productsListTitle-three .swiper-slide {
+  width: 2.2rem;
+  font-size: 0.24rem;
+}
+
+.productsListTitle-three .slide-active {
+  background: url(../img/tab-small.png) !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.productsListTitle-more {
+  overflow-x: scroll;
+}
+
+.productsListTitle-more .swiper-slide {
+  width: 2rem;
+  font-size: 0.22rem;
+  margin-right: 0.2rem;
+}
+
+.productsListTitle-more .swiper-slide:last-child {
+  margin-right: 0;
+}
+
+.productsListTitle-more .slide-active {
+  background: url(../img/tab-small.png) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+.profit-simple {
+  height: 1.76rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background: #FFFFFF;
+}
+
+.profit-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.profit-item>div:first-child {
+  font-family: PingFangSC-Regular;
+  font-size: 0.24rem;
+  color: #777777;
+  text-align: center;
+  font-weight: 400;
+}
+
+.profit-item>div:last-child {
+  font-family: PingFangSC-Medium;
+  font-size: 0.36rem;
+  /* color: #222222; */
+  text-align: center;
+  font-weight: 500;
+}
+
+.jzzs {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.simple-syzs {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.riskData {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.riskDataTitle {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 0.8rem;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 0 0.2rem;
+}
+
+.riskDataTitle>div {
+  font-family: PingFangSC-Regular;
+  font-size: 0.28rem;
+  color: #777777;
+  letter-spacing: 0;
+  font-weight: 400;
+  text-align: right;
+  width: 18%;
+}
+
+.riskDataTitle>div:first-child {
+  width: 28%;
+}
+
+.riskDataContent {
+  padding: 0.14rem 0.2rem;
+}
+
+.riskDataItem {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 0.8rem;
+}
+
+.riskDataItem>div {
+  font-family: PingFangSC-Regular;
+  font-size: 0.24rem;
+  color: #222222;
+  letter-spacing: 0;
+  font-weight: 400;
+  text-align: right;
+  width: 18%;
+}
+
+.riskDataItem>div:first-child {
+  width: 28%;
+  font-size: 0.28rem;
+  text-align: left;
+}
+
+.footer {
+  height: 1.36rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  font-family: PingFangSC-Regular;
+  font-size: 0.28rem;
+  color: #AAAAAA;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* 资产分析 */
+.zcpz {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+  padding-bottom: 0.2rem;
+}
+
+.zcpz .chart {
+  height: 3rem;
+}
+
+.zcpz-content {
+  padding-bottom: 0.2rem;
+}
+
+.zcpz-items {
+  padding: 0.1rem 0.3rem 0.2rem 0.58rem;
+}
+
+.zcpz-title {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  font-family: PingFangSC-Regular;
+  font-size: 0.3rem;
+  color: #222222;
+  letter-spacing: 0;
+  line-height: 0.4rem;
+  font-weight: 400;
+  padding-bottom: 0.26rem;
+}
+
+.zcpz-content .zcpz-items::before {
+  content: '';
+  width: 0.16rem;
+  height: 0.16rem;
+  background: #C8893B;
+  position: absolute;
+  border-radius: 0.02rem;
+  margin-left: -0.3rem;
+  margin-top: 0.12rem;
+}
+
+.zcpz-content .zcpz-items:nth-child(2)::before {
+  background: #658AF8 !important;
+}
+
+.zcpz-content .zcpz-items:nth-child(3)::before {
+  background: #FF9860 !important;
+}
+
+.zcpz-content .zcpz-items:nth-child(4)::before {
+  background: #E5E5E5 !important;
+}
+
+.zcpz-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 0.03rem 0;
+  font-family: PingFangSC-Regular;
+  font-size: 0.26rem;
+  color: #777777;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+/* 持仓产品净值走势 */
+.cccpjzzs {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.holdNetList-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.01rem solid rgba(212, 153, 89, 1);
+  border-radius: 0.04rem;
+  margin: 0 .3rem .3rem;
+  height: .6rem;
+}
+
+.holdnet-list-item {
+  flex: 1;
+  text-align: center;
+  border-right: 0.01rem solid rgba(212, 153, 89, 1);
+  height: 100%;
+  line-height: .6rem;
+  font-size: .26rem;
+  color: #B26F1C;
+}
+
+.holdnet-list-item:last-child {
+  border: none;
+}
+
+.holdnet-list-item-active {
+  background-image: radial-gradient(circle at 1e+02% 0%, #F6D794 0%, #D09151 114%);
+  color: #fff;
+  font-weight: border;
+
+}
+
+.cccpjzzs .tipsInfo {
+  padding: 0 .2rem;
+  display: flex;
+  line-height: .58rem;
+  flex-wrap: wrap;
+}
+
+.tipsInfoItem {
+  margin-right: .24rem;
+}
+
+.tipsInfoItem>span {
+  display: inline-block;
+}
+
+.tipsInfo-color {
+  width: .16rem;
+  height: .16rem;
+  margin-right: .1rem;
+}
+
+.cccpjzzs.tableChartCont .tipsDate {
+  top: 0;
+  bottom: auto;
+  background: #E2B371;
+  font-size: .2rem;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  font-weight: 400;
+  height: .36rem;
+  line-height: .38rem;
+  padding: 0 .1rem;
+  width: max-content;
+}
+
+
+
+/* 收益贡献 */
+.sygx {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.navbar {
+  padding: 0.3rem 0.2rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.navbar li {
+  width: 1.44rem;
+  height: 0.48rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: #F5F5F5;
+  border-radius: 0.25rem;
+  font-family: PingFangSC-Regular;
+  font-size: 0.26rem;
+  color: #777777;
+  font-weight: 400;
+}
+
+.navbar .active {
+  background: #FFF4E1;
+  color: #B26F1C;
+  font-weight: 500;
+}
+
+.profitDetailChart {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  /* margin: auto; */
+  width: 100%;
+  height: 2.5rem;
+  /* padding: 0 3rem; */
+}
+
+.contriDetailChart {
+  width: 100%;
+  height: 3rem;
+}
+
+
+.sygx-detail {
+  padding: 0.2rem 0;
+}
+
+.sygx-detail li {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 0.1rem 0.3rem;
+  font-family: PingFangSC-Regular;
+  font-size: 0.3rem;
+  color: #222222;
+  letter-spacing: 0;
+  line-height: 0.45rem;
+  font-weight: 400;
+}
+
+.sygx-detail i {
+  width: 0.16rem;
+  height: 0.16rem;
+  margin-right: 0.1rem;
+}
+
+.sygx-name {
+  width: 40%;
+  padding-right: 0.2rem;
+}
+
+.sygx-item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  text-align: left;
+}
+
+.sygx-switch {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 1.4rem;
+  width: 100%;
+}
+
+.sygx-switch span {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  font-family: PingFangSC-Regular;
+  font-size: 0.26rem;
+  color: #999999;
+  text-align: center;
+  line-height: 0.38rem;
+  font-weight: 400;
+  width: 1.54rem;
+  height: 0.6rem;
+}
+
+.sygx-switch span:first-child {
+  border: 0.02rem solid rgba(231, 231, 231, 1);
+  border-radius: 0.078rem 0 0 0.078rem;
+  border-right: none;
+}
+
+.sygx-switch span:last-child {
+  border: 0.02rem solid rgba(231, 231, 231, 1);
+  border-radius: 0 0.078rem 0.078rem 0;
+  border-left: none;
+}
+
+.sygx-switch .active {
+  font-family: PingFangSC-Medium;
+  color: #B26F1C;
+  background: #F7D5AA;
+  font-weight: 500;
+  border: 0.02rem solid rgba(247, 213, 170, 1);
+}
+
+.sygx-guide {
+  font-family: PingFangSC-Regular;
+  font-size: 0.26rem;
+  color: #333333;
+  line-height: 0.36rem;
+  font-weight: 400;
+  min-width: 2rem;
+}
+
+.sygx-profit {
+  text-align: right;
+}
+
+.sygx-profit i {
+  color: #DE2121;
+}
+
+.sygx-loss {
+  text-align: left;
+}
+
+.sygx-loss i {
+  color: #529C4F;
+}
+
+.contriHoriChart {
+  width: 100%;
+  height: .5rem;
+}
+
+.horiText {
+  font-family: PingFangSC-Regular;
+  font-size: 0.26rem;
+  color: #333333;
+  line-height: 0.36rem;
+  font-weight: 400;
+  min-width: 3rem;
+}
+
+
+/* 市场月度配置观点 */
+.scydpzgd {
+  margin: 0.2rem 0.2rem 0 0.2rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.audio {
+  height: 1.3rem;
+  padding: 0 0.15rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.audio audio {
+  width: 100%;
+  height: 0.6rem;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #F9F9F9;
+}
+
+.audio audio{
+  height: 0.4rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.audio .pauseAudio::-webkit-media-controls-play-button {
+  background-image: url('../img/play.png');
+}
+
+.audio .playAudio::-webkit-media-controls-play-button {
+  background-image: url('../img/pause.png');
+}
+
+.ydpz-content {
+  padding: 0 0.28rem 0.2rem 0.28rem;
+}
+
+.ydpz-title {
+  font-family: PingFangSC-Medium;
+  font-size: 0.3rem;
+  color: #222222;
+  letter-spacing: 0;
+  text-align: left;
+  font-weight: 500;
+  padding: 0.3rem 0 0.2rem 0;
+}
+
+.ydpz-item-calculate {
+  visibility: hidden;
+  position: absolute;
+  line-height: .44rem;
+  font-size: .28rem;
+  letter-spacing: 0;
+  left: .48rem;
+  right: .48rem;
+}
+
+.ydpz-item {
+  font-family: PingFangSC-Regular;
+  font-size: 0.28rem;
+  color: #444444;
+  letter-spacing: 0;
+  line-height: 0.44rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+  position: relative;
+  /* display: -webkit-box;
+  overflow: hidden;
+  white-space: normal !important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; */
+}
+
+.ydpz-item-text {
+  display: inline-block;
+}
+
+.ydpz-item .operate {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #448CFC;
+  display: flex;
+  align-items: center;
+}
+
+.ydpz-item .operate-up {
+  display: inline-flex;
+  position: relative;
+}
+
+.operate .operate-icon {
+  width: .28rem;
+  height: .28rem;
+}
+
+.operate-icon-up {
+  transform: rotate(180deg);
+}
+
+.ydpz-content>div:not(:last-child) {
+  border-bottom: 1px solid rgba(231, 231, 231, 0.5);
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环形数字</title>
+    <style>
+        input{
+            width: 260px;
+            height: 40px;
+        }
+        .numBox{
+            margin-top: 50px;
+            border: 1px solid #ccc;
+            display: inline-block;
+        }
+        .subBox{
+            display: flex;
+        }
+        .item{
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="operationBox">
+        <input id="input" placeholder="请输入行和列，例如: 3*4   回车键结束" />
+    </div>
+    <div class="numBox" id="numBox"></div>
+    <script>
+        input.addEventListener('keydown', keydownHandle)
+        function keydownHandle(e) {
+            if (e.key !== 'Enter') return
+            removeChildren(numBox)
+            let temArr = this.value.split('*')
+            if (!temArr.length) return
+            let line = Number(temArr[0])
+            let column = Number(temArr[1])
+            let multiArr = Array.from({length: column}, ()=> new Array(line).fill(0))
+            numberChange(multiArr, line, column)
+            console.log(multiArr)
+            domFrame(multiArr)
+        }
+
+        function numberChange(multiArr, line, column) {
+            let changeNum = 1
+            let tem = 0
+            let x = 0, y = 0
+            let dirX = 1, dirY = 0
+            while(changeNum <= line * column) {
+                tem += 1
+                if (tem > 20000) break
+                if (multiArr?.[y]?.[x] === 0) {
+                    multiArr[y][x] = changeNum
+                    x += dirX
+                    y += dirY
+                    changeNum +=1
+                } else {
+                    if (dirX === 1 && dirY === 0) {
+                        dirX = 0 
+                        dirY = 1
+                        x -= 1
+                    } else if (dirY === 1 && dirX === 0) {
+                        dirX = -1 
+                        dirY = 0
+                        y -= 1
+                    } else if (dirX === -1 && dirY === 0) {
+                        dirX = 0
+                        dirY = -1
+                        x += 1
+                    } else if (dirX === 0 && dirY === -1) {
+                        dirX = 1
+                        dirY = 0
+                        y += 1
+                    }
+                    x += dirX
+                    y += dirY
+                    console.log('xy', `坐标：xy: ${x}:${y}`, dirX, dirY, multiArr?.[y]?.[x])
+                }
+            }
+        }
+
+
+        function domFrame(multiArr) {
+            multiArr.forEach(sonArr => {
+                let subBox = createElem('div', numBox, 'subBox') 
+                sonArr.forEach(item => {
+                    createElem('div', subBox, 'item', item) 
+                })
+            })
+        }
+        
+        function createElem(type,parent, className, innerText){
+            let elem=document.createElement(type)
+            if (className) elem.className = className
+            if (innerText) elem.innerText = innerText
+            if(parent) parent.appendChild(elem)
+            return elem
+        }
+
+        function removeChildren(parent) {
+            let children = Array.from(parent.children)
+            children.forEach(item => parent.removeChild(item))
+        }
+
+    </script>
+</body>
+</html>

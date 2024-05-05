@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖动录制</title>
+    <style>
+        div{width:100px;height:100px;background:skyblue;position:absolute;}
+    </style>
+    <script src="./universalMethod.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    var div
+    var arr=[]
+    var state=0
+    var list=[]
+    var index=0
+    init()
+    function init(){
+        div=document.getElementById("box")
+        Method.dragElem(div)
+        div.addEventListener("mousedown",mouseHandle)
+        div.addEventListener("mouseup",mouseHandle)
+        setInterval(animation,16)
+
+    }
+    function mouseHandle(e){
+        if(e.type==="mousedown"){
+            state=1
+        }
+        if(e.type==="mouseup"){
+            moveShadow()
+            state=2
+        }
+    }
+    function animation(){
+        if(state===0) return
+        if(state===1){
+            record()
+        }
+        if(state===2){
+            play()
+        }
+    }
+
+    function moveShadow(){
+        var bool=false
+        if(list.length===0) bool=true
+        for(var i=0;i<5;i++){
+            if(bool)list.push(div.cloneNode(false))
+            list[i].style.opacity=1-i*0.2
+            document.body.appendChild(list[i])
+            console.log(i)
+        }
+    }
+
+    function record(){
+        var rect=div.getBoundingClientRect()
+        arr.push({x:rect.x,y:rect.y})
+    }
+
+    function play(){
+        var point=arr[index]
+        index++
+        if(point) {
+            div.style.left = point.x + "px"
+            div.style.top = point.y + "px"
+        }
+        var bool=false
+        for(var i=0;i<list.length;i++){
+            if(!arr[index-i]) continue
+            list[i].style.left=arr[index-i].x+"px"
+            list[i].style.top=arr[index-i].y+"px"
+            bool=true
+        }
+        if(!bool){
+            state=0
+            for(var j=0;j<list.length;j++){
+                list[j].remove();
+            }
+        }
+    }
+</script>
+</body>
+</html>

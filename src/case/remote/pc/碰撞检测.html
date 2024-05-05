@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>碰撞检测</title>
+    <style>
+      div {
+        position: absolute;
+      }
+      .ball {
+        width: 30px;
+        height: 30px;
+        background-color: aqua;
+        top: 150px;
+        left: 250px;
+      }
+      .board {
+        width: 200px;
+        height: 10px;
+        background-color: red;
+        top: 300px;
+        left: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+    <div class="board"></div>
+    <div class="info">碰撞记录：</div>
+
+    <script>
+      let ball = document.querySelector(".ball");
+      let board = document.querySelector(".board");
+      let infoBox = document.querySelector(".info");
+      let time = 0
+      ball.addEventListener("mousedown", moveMouseHandler, true);
+      board.addEventListener("mousedown", moveMouseHandler, true);
+
+      function moveMouseHandler(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.type === "mousedown") {
+          document.addEventListener("mousemove", moveMouseHandler);
+          document.position = { x: e.offsetX, y: e.offsetY };
+          document.elem = this;
+          this.addEventListener("mouseup", moveMouseHandler);
+        }
+        if (e.type === "mousemove") {
+          if (answerToPosition(ball, board)) {
+            time++
+            infoBox.innerHTML = '碰撞记录：' + time
+            console.log('aaa', '碰撞了')
+          }
+          this.elem.style.left = e.x - this.position.x + "px";
+          this.elem.style.top = e.y - this.position.y + "px";
+        }
+        if (e.type === "mouseup") {
+          document.position = null;
+          document.elem = null;
+          document.removeEventListener("mousemove", moveMouseHandler);
+          this.removeEventListener("mouseup", moveMouseHandler);
+        }
+      }
+
+      // 碰撞检测
+      function answerToPosition(dom, positionDom) {
+        let a = dom.getBoundingClientRect();
+        let b = positionDom.getBoundingClientRect();
+        if ( a.left >= b.left && a.left <= b.right && a.top >= b.top && a.top <= b.bottom ) return true
+        if ( a.right >= b.left && a.right <= b.right && a.top >= b.top && a.top <= b.bottom ) return true;
+        if ( a.left >= b.left && a.left <= b.right && a.bottom >= b.top && a.bottom <= b.bottom ) return true;
+        if ( a.right >= b.left && a.right <= b.right && a.bottom >= b.top && a.bottom <= b.bottom ) return true;
+        if ( b.left >= a.left && b.left <= a.right && b.top >= a.top && b.top <= a.bottom ) return true
+        if ( b.right >= a.left && b.right <= a.right && b.top >= a.top && b.top <= a.bottom ) return true;
+        if ( b.left >= a.left && b.left <= a.right && b.bottom >= a.top && b.bottom <= a.bottom ) return true;
+        if ( b.right >= a.left && b.right <= a.right && b.bottom >= a.top && b.bottom <= a.bottom ) return true;
+      }
+    </script>
+  </body>
+</html>
