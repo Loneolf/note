@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, Drawer, Popover, Button } from "antd";
+import { Menu, Drawer, Popover, Button, message  } from "antd";
 import type { MenuProps } from "antd";
 import Split from '@c/split'
 import { frameAddTouch, generateQR } from '@u/util'
 import { caseConfig } from './dealCaseData'
+import { caseIntrol } from './caseIntrol'
 import '@ac/contentCom.scss'
 import './index.scss'
-
-console.log('aaaa2333caseConfig' ,caseConfig)
 
 export default function Case() {
 	const [frameSrc, setFrameSrc] = useState(caseConfig[0].key)
 	const [leftDom, setLeftDome] = useState<HTMLDivElement>();
 	const [open, setOpen] = useState(false);
 	const [QRimgSrc, setQRimgSrc] = useState('')
+	const [introItem, setIntroItem] = useState(finddIntro(caseConfig[0].key))
 	const frame = useRef<HTMLIFrameElement>(null)
 
-	const menuClick: MenuProps['onClick'] = function ({keyPath}) {
-		console.log('aaaaamenuClick', keyPath)
-		setFrameSrc(keyPath[0])
-		if (!frame.current || !keyPath[0].includes('mobile')) return
+	const menuClick: MenuProps['onClick'] = function ({ key }) {
+		// console.log('aaaaamenuClick')
+		setFrameSrc(key)
+		setIntroItem(finddIntro(key))
+		if (!frame.current || !key.includes('mobile')) return
 		frameAddTouch(frame.current, true)
 	}
 	
@@ -32,6 +33,20 @@ export default function Case() {
 			frameAddTouch(frame.current, true)
 		}
 	}, [])
+
+	function finddIntro(url:string) {
+		let currenItem = caseConfig.find((item)=> item.key === url)
+		if (!currenItem) return
+		return caseIntrol[currenItem?.label as '拖动录制']
+	}
+
+	function openIntroDrawer() {
+		if (!introItem?.intro.length) {
+			message.info('暂无介绍', 1)
+			return
+		}
+		setOpen(true)
+	}
 
 	const isMobileFrame = frameSrc.includes("mobile")
 
@@ -56,7 +71,7 @@ export default function Case() {
 							</a>
 						</>
 					}
-					<Button type="primary" onClick={() => setOpen(true)}>案例介绍</Button>
+					<Button type="primary" onClick={openIntroDrawer}>案例介绍</Button>
 				</div>
 				{isMobileFrame ? (
 					<div className="mobileframebox">
