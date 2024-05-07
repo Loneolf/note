@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>瀑布流</title>
+    <style>
+      .clear:after {
+        content: " ";
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+      }
+    </style>
+    <script src="./universalMethod.js"></script>
+  </head>
+  <body>
+    <script>
+      var ul,
+        margin = 5,
+        img;
+      const LIST = 5;
+      var minHeightLi = [];
+      var num = 2;
+      var bodyWidth;
+      init();
+      function init() {
+        ul = Method.createElem("ul", document.body, {
+          width: document.body.clientWidth + "px",
+          margin: 0,
+          padding: 0,
+        });
+        ul.className = "clear";
+        for (var i = 0; i < LIST; i++) {
+          var li = Method.createElem("li", ul, {
+            float: "left",
+            listStyle: "none",
+            width: document.body.clientWidth / LIST - margin + "px",
+            marginLeft: i === 0 ? 0 : margin + "px",
+          });
+          li.index = i;
+          minHeightLi.push(0);
+        }
+        window.addEventListener("resize", resizeHandler);
+        createImg();
+        document.addEventListener("scroll", scrollHandler);
+      }
+
+      function createImg() {
+        img = new Image();
+        img.src = "img/" + num + "-.jpg";
+        img.addEventListener("load", loadHandler);
+      }
+
+      function loadHandler() {
+        var imgClone = this.cloneNode(false);
+        imgClone.style.width = document.body.clientWidth / 5 - margin + "px";
+        var obj = getMinHeightLi();
+        obj.li.appendChild(imgClone);
+        console.log(imgClone.style.width);
+        if (document.body.clientWidth !== bodyWidth) {
+          bodyWidth = document.body.clientWidth;
+          resizeHandler();
+        }
+        minHeightLi[obj.index] = obj.li.offsetHeight;
+
+        if (
+          document.body.clientHeight - document.documentElement.scrollTop >
+          document.documentElement.clientHeight * 5
+        ) {
+          return;
+        }
+        reLoadImg();
+      }
+
+      function reLoadImg() {
+        num++;
+        if (num > 79) {
+          num = 2;
+        }
+        img.src = "img/" + num + "-.jpg";
+      }
+      function scrollHandler() {
+        if (
+          document.body.clientHeight - document.documentElement.scrollTop <
+          document.documentElement.clientHeight * 2
+        ) {
+          reLoadImg();
+        }
+      }
+
+      function resizeHandler() {
+        var width = document.body.clientWidth / LIST - margin + "px";
+        ul.style.width = document.body.clientWidth + "px";
+
+        for (var i = 0; i < LIST; i++) {
+          ul.children[i].style.width = width;
+          for (var j = 0; j < ul.children[i].children.length; j++) {
+            ul.children[i].children[j].style.width = width;
+          }
+          minHeightLi[i] = ul.children[i].offsetHeight;
+        }
+      }
+
+      function getMinHeightLi() {
+        var minHeight = Math.min.apply(null, minHeightLi);
+        var index = minHeightLi.indexOf(minHeight);
+        var li = ul.children[index];
+        return { index: index, li: li };
+      }
+    </script>
+  </body>
+</html>

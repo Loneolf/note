@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../lib/base-min.css" />
+	<link rel="stylesheet" href="../lib/vant/index@2.12.css" />
+	<link rel="stylesheet" href="./css/index.css" />
+	<title>F2 练习</title>
+</head>
+
+<body>
+	<div id="container">
+		<!--总金额 收益走势 -->
+		<div class="top-area">
+			<div class="assets">
+				<div class="total-assets">
+					<div>总金额(元)</div>
+					<div :class="fnColor(totalAmount)">{{totalAmount}}</div>
+				</div>
+				<div class="profits">
+					<div>
+						<div>持有收益(元)</div>
+						<div :class="fnColor(holdPl)">{{decimalFormat(holdPl, 1)}}</div>
+					</div>
+					<div>
+						<div class="ljsy">累计收益(元)</div>
+						<div :class="fnColor(totalPl)">{{decimalFormat(totalPl,1)}}</div>
+					</div>
+				</div>
+				<div class="commit-1">资产分析包含财富私享、信享臻选系列产品，不含家族信托</div>
+
+			</div>
+		</div>
+		
+		<div class="syzs tableChartCont">
+			<div class="hot-recommend-title">
+				<h1>收益走势</h1>
+			</div>
+			<div class="chartCont">
+				<div class="chartRelative">
+					<div class="tipsInfo">
+						<div>
+							<div class="chartTitleIco"></div>
+							<span>累计收益：</span>
+							<span :class="fnColor(yieldTipsData)">{{yieldTipsData}}</span>
+						</div>
+						<div>{{yieldTipsDate}}</div>
+					</div>
+
+					<div class="canvasCont">
+						<canvas class="chart" id="profitChart"></canvas>
+						<div class="tips1 top58" v-show="yieldTipsFlag" ref="yieldTipsFlag"></div>
+					</div>
+				</div>
+				<ul class="chartDate">
+					<li v-for="(v,i) of chartDateNav" :key="i" :class="{liBg:chartDateValue===v.val}"
+						@click="chartDateNavSwitch(v,i)">{{v.name}}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="">
+			<div :class="['swiper-container','productsListTitle', productsList.length > 3 ? 'productsListTitle-more' : productsList.length == 1 ? 'productsListTitle-one': productsList.length == 2 ? 'productsListTitle-two' : productsList.length == 3 ? 'productsListTitle-three' : 'productsListTitle-none']" id="productsListTitle">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide productsListTitleItem" v-for="(item, i) in productsList">
+						<div>
+							{{ item.name }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="profit-simple">
+				<div class="profit-item">
+					<div>持仓金额(元)</div>
+					<div>18,998.03</div>
+				</div>
+				<div class="profit-item">
+					<div>持有收益(元)</div>
+					<div>8,998.03</div>
+				</div>
+				<div class="profit-item">
+					<div>累计收益(元)</div>
+					<div>9998.03</div>
+				</div>
+			</div>
+		</div>
+		<div class="jzzs tableChartCont">
+			<div class="hot-recommend-title">
+				<h1>净值走势</h1>
+			</div>
+			<div class="chartCont">
+				<div class="chartRelative">
+					
+					<div class="tipsInfo" ref="netValueTipsDataFlag">
+						<div>
+							<div class="chartTitleIco"></div>
+							<span>单位净值：</span>
+							<span>{{decimalFormat(netValueTipsData, true)}}</span>
+						</div>
+						<div>{{netValueTipsDate}}</div>
+					</div>
+
+					<div class="canvasCont">
+						<canvas class="chart" id="netValueChart"></canvas>
+						<div class="tips1 top58" ref="netValueTipsFlag" v-show="netValueTipsFlag"></div>
+					</div>
+				</div>
+				<ul class="chartDate">
+					<li v-for="(v,i) of netValueChartDateNav" :key="i" :class="{liBg:netValueChartDateValue===v.val}" @click="netValueChartDateNavSwitch(v,i)">{{v.name}}</li>
+					<li @click="switchNetValuePop(true)" :class="{liBg:netValueMoreDateName!=='更多'}">
+						<div class="charMore">
+							<div class="charMoreTxt">{{netValueMoreDateName}}</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="riskData">
+			<div class="hot-recommend-title">
+				<h1>风险收益指标</h1>
+			</div>
+			<div class="riskDataTitle border-bottom-e7">
+				<div></div>
+				<div v-for="item of riskYearArr">{{item[1]}}</div>
+			</div>
+			<div class="riskDataContent">
+				<div class="riskDataItem" v-for="(item, index) in riskData">
+					<div  class="itemCell cellTitle">{{item.name}}</div>
+					<div 
+						class="itemCell" 
+						v-for="(si, sindex) of riskYearArr" 
+						:class="{'normal-red': sindex == riskYearArr.length - 1}" 
+					>
+						{{item[si[0]]}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 资产配置 -->
+		<div class="zcpz tableChartCont">
+			<div class="hot-recommend-title">
+				<h1>资产配置<span>更新时间 {{assetsDisUpdata}}</span></h1>
+			</div>
+			<div class="">
+				<canvas class="chart" id="assetsDisChart"></canvas>
+			</div>
+			<div class="zcpz-content" v-if="assetsList.length > 0">
+				<div class="zcpz-items" v-for="(item, index) of assetsList" :key="item.asset_type">
+					<div class="zcpz-title">
+						<span>{{item.asset_name}}&ensp;{{item.asset_percent}}%</span>
+						<span>{{decimalFormat(item.asset_mkt)}}</span>
+					</div>
+					<div v-for="(subi, subix) of item.comp_list" class="zcpz-item">
+						<span>{{subi.comp_name}}</span>
+						<span>{{decimalFormat(subi.comp_mkt)}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 持仓产品净值走势 -->
+		<div class="cccpjzzs tableChartCont">
+			<div class="hot-recommend-title">
+				<h1>持仓产品净值走势
+					<span>更新时间 {{holdNetUpdate}}</span>
+				</h1>
+			</div>
+			<div class="holdNetList-box">
+				<div 
+					class="holdnet-list-item" 
+					v-for="item of holdNetAssetTypeList" 
+					:class="item === holdNetAssetTypeSelect ? 'holdnet-list-item-active': ''"
+					:key="item"
+					@click="holdNetChartDateNavSwitch('type', item)"
+				>{{item}}</div>
+			</div>
+			<div class="chartCont">
+				<div class="chartRelative">
+					<div class="tipsInfo" ref="holdNetTipsDataFlag">
+						<div class="tipsInfoItem" v-for="item of holdNetTipsTitle[holdNetAssetTypeSelect]">
+							<span class="tipsInfo-color" :style="{'background': holdNetMoreColorMap[item.prodName]}"></span>
+							<span class="tipsInfo-text"> {{item.prodName}}</span>
+							<span class="tipsInfo-valur" :class="fnColor(item.prodValue)">{{decimalFormat(item.prodValue, true)}}</span>
+						</div>
+					</div>
+
+					<div class="canvasCont">
+						<canvas class="chart" id="holdNetChart"></canvas>
+						<div class="tips1 top58" v-show="holdNetTipsDateFlag" ref="holdNetTipsFlag" ></div>
+						<div class="tipsDate" v-show="holdNetTipsDateFlag" ref="holdNetTipsDateFlag" >{{holdNetTipsDate}}</div>
+					</div>
+				</div>
+				<ul class="chartDate">
+					<li v-for="(v,i) of holdNetChartDateNav" :key="i" :class="{liBg:v.val == holdNetChartDateValue}" @click="holdNetChartDateNavSwitch('period',v)">{{v.name}}</li>
+					<li @click="setHoldNetPop(true)" :class="{liBg:holdNetMoreDateName!='更多'}">
+						<div class="charMore">
+							<div class="charMoreTxt">{{holdNetMoreDateName}}</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- 收益贡献 -->
+		<div class="sygx">
+			<div class="hot-recommend-title">
+				<h1>收益贡献 <span>更新时间 {{contrlDate}}</span></h1>
+			</div>
+			<ul class="navbar">
+				<li 
+					v-for="item of contriDateNav" 
+					:class="{active: item.val === contriNavValue}"
+					@click="switchZCPZ(item)"
+				>
+					{{item.name}}
+				</li>
+			</ul>
+			<div class="" style="width: 100%; position: relative;">
+				<canvas class="chart profitDetailChart" id="profitDetailChart"></canvas>
+				<canvas class="chart contriHoriChart" id="contriHoriChart"></canvas>
+			</div>
+			<div>
+				<canvas class="chart contriDetailChart" id="contriDetailChart"></canvas>
+			</div>
+			<ul class="sygx-detail">
+				<li v-for="(item, index) in contriDetail[contriIndex]">
+					<i :style="{'background':colorMap[item.name]}"></i>
+					<div class="sygx-name">{{item.name}}</div>
+					<div class="sygx-item">{{(item.ratio * 100).toFixed(2) }}%</div>
+					<div class="sygx-item text-right" :class="fnColor(item.amount)">{{decimalFormat(item.amount, true)}}</div>
+				</li>
+			</ul>
+			<div class="sygx-switch">
+					<span :class="{active: contriIndex === 'profit'}" v-tap="{methods:switchZCPXDetail, index: 'profit'}">盈利视图</span>
+					<span :class="{active: contriIndex === 'loss'}" v-tap="{methods:switchZCPXDetail, index: 'loss'}">亏损视图</span>
+			</div>
+		</div>
+
+		<!-- 市场月度配置观点 -->
+		<div class="scydpzgd">
+			<div class="hot-recommend-title">
+				<h1>市场月度配置观点
+					<span>更新时间 2023年9月8日</span>
+				</h1>
+			</div>
+			<div class="audio border-bottom-e7">
+				<audio 
+					:class="isAudioPlay ? 'playAudio' : 'pauseAudio'" 
+					:src="audio_url" 
+					id="ydpzAudio" 
+					controls 
+					controlslist="nodownload"
+				>
+					浏览器不支持该文件
+				</audio>
+			</div>
+			<div class="ydpz-content">
+				<div class="ydpz-item-calculate"></div>
+				<div class="ydpz-item-box" v-for="(item, index) in analyze_market">
+					<div class="ydpz-title">{{item.title}}</div>
+					<div class="ydpz-item" id="ydpz-item">
+						<div class="ydpz-item-text">
+							{{item.showText}}
+							<div 
+								v-if="item.showOperate && !item.isFold" 
+								class="operate operate-up" 
+								@click="foldTextHandle(item, index)"
+							>
+								<span class="operate-text">收起</span>
+								<img class="operate-icon operate-icon-up" src="./img/lookMore.png" />
+							</div>
+						</div>
+						<div 
+							v-if="item.showOperate && item.isFold" 
+							class="operate" 
+							@click="foldTextHandle(item, index)"
+						>
+							<span class="operate-text">展开</span>
+							<img class="operate-icon"src="./img/lookMore.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<van-popup class="morePopCont" v-model:show="netValueMorePopFlag" position="bottom">
+            <div 
+				class="dateNav" v-for="(v,i) of netValueMoreDateNav" 
+				:key="i" @click="netValuePopSwitch(v,i)" 
+				:class="{red:netValueChartDateValue===v.val}"
+			>
+				{{v.name}}
+			</div>
+            <div class="cancel" @click="switchNetValuePop(false)">取消</div>
+        </van-popup>
+		<van-popup class="morePopCont" v-model:show="holdNetMorePop" position="bottom">
+            <div class="dateNav" v-for="(v,i) of holdNetMoreDateNav" :key="i" @click="holdNetMorePopSwitch(v,i)" :class="{red:holdNetChartDateValue === v.val}">{{v.name}}</div>
+            <div class="cancel" @click="setHoldNetPop(false)">取消</div>
+        </van-popup>
+
+
+		<!-- <canvas class="chart" id="ring"></canvas>
+			<canvas class="chart" id="testaa"></canvas> -->
+	</div>
+	<script src="../lib/f2.min.js"></script>
+	<script src="../lib/remFlex.js"></script>
+	<script src="../lib/vue.min.js"></script>
+	<script src="../lib/vant/vant@2.12.min.js"></script>
+	<script type="module" src="./js/index.js"></script>
+	<!-- <script type="module" src="./js/demo.js"></script>
+		<script type="module" src="./js/test.js"></script> -->
+</body>
+
+</html>

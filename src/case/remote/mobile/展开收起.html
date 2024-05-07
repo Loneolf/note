@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>多行省略号</title>
+    <style>
+      .testDiv{
+        height:auto;
+        position: relative;
+      }
+      .text{
+        overflow: hidden;
+        line-height: 24px; 
+        height:auto;
+      }
+      .iconBox{
+        position: absolute;
+        right: 0;
+        bottom: -10px;
+        display: inline;
+      }
+      .none{
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class='testDiv'>
+      <p class='text'>
+        我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字,我是测试文字
+      </p>
+      <div class='iconBox'>
+       <svg t="1582374221662" class="downIcon" viewBox="0 0 1024 1024" version="1.1"  p-id="1861" width="30" height="30"><defs><style type="text/css"></style></defs><path d="M948.82895 361.713158c14.389732 18.446118 15.597233 41.568744 2.694365 51.643194L530.687618 741.618655c-2.910283 2.28095-12.262278 7.896854-13.852496 9.662057-15.679098 17.331737-38.223556 22.534226-50.383504 11.56029L70.112847 405.439032c-12.159948-10.984169-9.351995-33.961486 6.328126-51.333132 15.680121-17.362436 38.223556-22.545482 50.424436-11.571546l360.707248 325.258898 411.822416-321.244468C912.338874 336.474334 934.470941 343.277274 948.82895 361.713158L948.82895 361.713158z" p-id="1862"></path></svg>
+       <svg t="1582374205890" class="upIcon" viewBox="0 0 1024 1024" version="1.1"  p-id="1141" width="30" height="30"><defs><style type="text/css"></style></defs><path d="M897.96 728.3c-18.8 18.8-49.1 18.801-67.901 0l-318-318-318 318c-18.8 18.8-49.2 18.8-67.901 0-18.8-18.8-18.801-49.1 0-67.901l352-352c18.8-18.8 49.2-18.8 67.901 0l352 352c9.4 9.4 14 21.7 14 34-0.1 12.2-4.7 24.501-14.1 33.9z" p-id="1142"></path></svg>
+      </div>
+    </div>
+    
+    <script>
+      // 行高为24，默认显示5行出现省略号
+      let down = true  // 展开与收缩控制器，true代表默认是收缩的
+      let line = 2 // 控制多少行才会有省略号的变量，当字数少于该行数时，不产生省略号和折叠打开标识。默认每行高度为24px
+
+      let text = document.querySelector('.text') // 获取文本P标签
+      let iconBox = document.querySelector('.iconBox') // 获取icon盒子标签
+      let downIcon = document.querySelector('.downIcon') // icon中的down
+      let upIcon = document.querySelector('.upIcon') // icon 中的up
+      let characterArr = text.innerHTML.split('') // 文本数组
+      // 判断当前行高是否小于折叠行数，如果小于折叠行数，不需要进行折叠，不展示图标并给文字加上空格
+      if(text.scrollHeight <= line*24){
+        text.innerHTML = `&emsp;&nbsp;${text.innerHTML}`
+        iconBox.className = 'iconBox none'
+      }else{
+        arrowChange() // 刚开始运行下函数，使如果字数超过所要的行数有省略号。
+        iconBox.addEventListener('click',clickHandle) // 给icon盒子添加点击事件
+      }
+      function clickHandle(){
+        down = !down
+        arrowChange()
+      }
+      function arrowChange(){
+        if(down){
+          // 当收缩时，up图标不显示，down图标显示
+          downIcon.style.display = 'inline' 
+          upIcon.style.display = 'none'
+          // 实现省略号的核心代码：使用innerHTML依次将字符串插入到text标签中，当其scrollHeight高度大于其实际高度时，就代表已经有了足够的字数。
+          // 然后适当减去几个字符，加上‘...’即可。
+          var shortCharacter = ''
+          for (let i = 0; i < characterArr.length; i++) {
+            shortCharacter += characterArr[i]
+            text.innerHTML = shortCharacter
+            console.log(text.scrollHeight)
+            if(text.scrollHeight > line*24){
+              // 还要再减去几个字符，因为图标也占空间
+              shortCharacter =  shortCharacter.substring(0,shortCharacter.length - 6)
+              text.innerHTML = `&emsp;&nbsp;${shortCharacter}...` 
+              break
+            }
+          }
+        } else {
+          // 当展开时，down图标不显示，up图标显示，然后text标签中的文本为所有字符
+          upIcon.style.display = 'inline'
+          downIcon.style.display = 'none'
+          text.innerHTML = `&emsp;&nbsp;${characterArr.join('')}`
+        }
+      }
+    </script>
+    
+  </body>
+</html>

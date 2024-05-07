@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>到指定位置的答案</title>
+    <style>
+        *{margin:0;padding:0;}
+        html,body{
+            height:100%;
+            overflow: hidden;
+        }
+        .answer{
+            width:100%;
+            height:20%;
+            border:1px solid #ccc;
+            position:relative;
+        }
+        .answerchidren{
+            width:50px;
+            height:50px;
+            background:deepskyblue;
+            position:absolute;
+            top:30%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            z-index: 1;
+        }
+        .a{
+            left:10%;
+        }
+        .b{
+            left:30%;
+        }
+        .c{
+            left:50%;
+        }
+        .d{
+            left:70%;
+        }
+
+        .position{
+            width:100%;
+            height:30%;
+            border:1px solid #ccc;
+            margin-top:5%;
+            display: flex;
+            flex-direction: column;
+            justify-content:space-around;
+            align-items: center;
+
+        }
+        .positionTop,.positionBottom{
+            width:60%;
+            height:50%;
+            display: flex;
+            justify-content:space-around;
+            align-items: center;
+        }
+        .positionchidren{
+            width:50px;
+            height:50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            border:1px dotted #ccc;
+            position:relative;
+        }
+    </style>
+</head>
+<body>
+    <div class='answer'>
+        <div class='a answerchidren'>A</div>
+        <div class="b answerchidren">B</div>
+        <div class="c answerchidren">C</div>
+        <div class="d answerchidren">D</div>
+    </div>
+    <div class='position'>
+        <div class='positionTop'>
+            <div class='position1 positionchidren'>1</div>
+            <div class='position2 positionchidren'>2</div>
+        </div>
+        <div class='positionBottom'>
+            <div class='position3 positionchidren'>3</div>
+            <div class='position4 positionchidren'>4</div>
+        </div>
+    </div>
+<script>
+    let answer = document.querySelector(".answer")
+    let position = document.querySelectorAll('.positionchidren')
+    for (let i = 0; i < answer.children.length; i++) {
+        drag(answer.children[i],position[i])
+    }
+    
+    // 范围检测
+    function answerToPosition(dom,positionDom){
+        let domRect =  dom.getBoundingClientRect()
+        let positionRect = positionDom.getBoundingClientRect()
+        if(domRect.left>=positionRect.left && domRect.left <= positionRect.right && domRect.top>=positionRect.top && domRect.top<=positionRect.bottom){
+            return true;
+        }
+        if(domRect.right>=positionRect.left && domRect.right<=positionRect.right && domRect.top>=positionRect.top && domRect.top<=positionRect.bottom){
+            return true;
+        }
+        if(domRect.left>=positionRect.left && domRect.left<=positionRect.right && domRect.bottom>=positionRect.top && domRect.bottom<=positionRect.bottom){
+            return true;
+        }
+        if(domRect.right>=positionRect.left && domRect.right<=positionRect.right && domRect.bottom>=positionRect.top && domRect.bottom<=positionRect.bottom){
+            return true;
+        }
+    }
+
+    // 拖拽
+    function drag(dom,positionDom){
+        dom.addEventListener("touchstart",mouseHandler)
+        dom.positionDom = positionDom
+    }
+    function mouseHandler(e){
+        if(e.type === "touchstart"){
+            let crashOver = answerToPosition(this,this.positionDom)
+            if(crashOver) {
+                this.removeEventListener('touchstart',mouseHandler)
+                return
+            }
+            document.addEventListener("touchmove",mouseHandler)
+            document.position={x:e.changedTouches[0].clientX-e.target.offsetLeft,y:e.changedTouches[0].clientY-e.target.offsetTop}
+            document.elem=this
+            this.addEventListener("touchend",mouseHandler)
+        }
+        if(e.type === "touchmove"){
+            this.elem.style.left=e.changedTouches[0].pageX-this.position.x+"px"
+            this.elem.style.top=e.changedTouches[0].pageY-this.position.y+"px"
+        }
+
+        if(e.type === "touchend"){
+            let crash = answerToPosition(this,this.positionDom)
+            if(crash){
+                this.style.left = this.positionDom.getBoundingClientRect().left + 'px'
+                this.style.top = this.positionDom.getBoundingClientRect().top + 'px'
+                setTimeout(() => {
+                    alert('选对了')
+                }, 100);
+            }
+            document.position = null
+            document.elem = null
+            document.removeEventListener("touchmove",mouseHandler)
+            this.removeEventListener("touchend",mouseHandler)
+        }
+    }
+</script>
+</body>
+</html>

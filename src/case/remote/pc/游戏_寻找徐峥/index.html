@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var div0
+    var LV=1
+    var arr=[]
+    init()
+    function init(){
+        div0=createElem("div",document.body,{width:"600px",height:"600px",border:"1px solid #ccc",margin:"auto",fontSize:0})
+        createImg()
+    }
+    function createImg(){
+        var width=600/(LV+1)+"px"
+        for(var i=0;i<Math.pow((LV+1),2);i++){
+            var img=createElem("img",null,{width:width,height:width})
+            img.src="img/2.png"
+            arr.push(img)
+        }
+        arr[0].src="img/1.png"
+        arr.sort(function(){
+            return Math.random()-0.5
+        })
+        for(var j=0;j<arr.length;j++){
+            div0.appendChild(arr[j]);
+            arr[j].addEventListener("click",clickHandler)
+        }
+    }
+    function remove(){
+        for(var i=0;i<arr.length;i++){
+            div0.removeChild(arr[i])
+                arr[i]=null
+        }
+        arr.length=0
+    }
+    function clickHandler(){
+        console.log(this.src,this.src.indexOf("1.png"))
+        if(~this.src.indexOf("2.png")){
+            alert("您点错啦")
+            remove()
+            createImg()
+            return
+        }
+        LV++
+        remove()
+        createImg()
+
+    }
+    function createElem(type,parent,style){
+        var elem=document.createElement(type)
+        if(parent) parent.appendChild(elem)
+        for(var key in style){
+            elem.style[key]=style[key]
+        }
+        return elem
+    }
+</script>
+</body>
+</html>

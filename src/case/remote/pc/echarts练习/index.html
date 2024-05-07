@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/index.css" />
+		<title>echarts-Dome</title>
+	</head>
+	<body>
+		<header>
+			<h1>可视化展板-ECharts</h1>
+			<div class="showTime"></div>
+		</header>
+		<section class="mainbox">
+			<div class="column">
+				<div class="panel bar">
+					<h2>
+						柱状图-就业行业 <span class="jobbtn" id="job2022">2022</span>
+						<span class="jobbtn" id="job2023"> 2023</sp>
+					</h2>
+					<div class="chart"></div>
+					<div class="panel-footer"></div>
+				</div>
+				<div class="panel line">
+					<h2>折线图-人员变化</h2>
+					<div class="chart"></div>
+					<div class="panel-footer"></div>
+				</div>
+				<div class="panel pie">
+					<h2>饼形图-年龄分布</h2>
+					<div class="chart"></div>
+					<div class="panel-footer"></div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="no">
+					<div class="no-hd">
+						<ul>
+							<li>125811</li>
+							<li>104563</li>
+						</ul>
+					</div>
+					<div class="no-bd">
+						<ul>
+							<li>飞机可承载人数</li>
+							<li>坐飞机人数</li>
+						</ul>
+					</div>
+				</div>
+				<div class="map">
+					<div class="chart"></div>
+					<div class="map1"></div>
+					<div class="map2"></div>
+					<div class="map3"></div>
+				</div>
+			</div>
+			<div class="column">
+				<div class="panel bar1">
+					<h2>柱状图-技能掌握</h2>
+					<div class="chart"></div>
+					<div class="panel-footer"></div>
+				</div>
+				<div class="panel line1">
+					<h2>折线图-播放量</h2>
+					<div class="chart"></div>
+					<div class="panel-footer"></div>
+				</div>
+				<div class="panel pie1">
+					<h2>饼形图-地区分布</h2>
+					<div class="chart"></div>
+					<div class="panel-footer"></div>
+				</div>
+			</div>
+		</section>
+		<script src="./js/time.js"></script>
+		<script src="./lib/flexible.js"></script>
+		<!-- <script src="./lib/echarts.min.js"></script> -->
+		<script src="./lib/echarts.min.5.js"></script>
+		<script src="./lib/china.js"></script>
+		<script type="module" src="./js/index.js"></script>
+	</body>
+</html>

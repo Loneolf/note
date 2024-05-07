@@ -1,0 +1,49 @@
+/* 彩蛋4 */
+#box{background:url(./img/bg2.jpg);background-size:100%;text-align: center;height:600px;width:90%;margin:0 auto;margin-top:100px;}
+/* logo与企业名称部分 */
+#box .head .head-left{width: 100%;height: 100px;position: relative;background:rgba(0,0,0,.3);top: 0;}
+#box .head-left .logo{float: left;width: 100px;height: 100px;background:url(./img/logo.png) no-repeat;background-size: 100%;margin-left: 30px;}
+#box .head-left .name{float: left;line-height:100px;font-size:50px;color:#333;font-family: "楷体";}
+#box .head-left .word{float: left;margin-top:50px;color:#ccc;}
+/* 照片墙部分 */
+#box .content{min-width: 1200px;}
+#box .photo{padding:50px;transition:all 2s;float: left;}
+#box .photo h3{margin:-50px auto 50px;}
+#box .photo img{width:170px;}
+#box .photo span{display:block;}
+#box .photo p{display:none;}
+#box .photo div{float: left;padding:10px;background:#eee;margin:10px;transition:all 1.5s;border-radius:10px;position:relative;box-shadow: 0px 0px 20px skyblue;}
+#box .photo .person1{transform:rotate(30deg);}
+#box .photo .person2{transform:rotate(-20deg);}
+#box .photo .person3{transform:rotate(40deg);}
+#box .photo .person4{transform:rotate(10deg);}
+#box .photo div:hover{transform: rotate(0deg) scale(1.3,1.3);z-index: 10;}
+#box .photo div:hover p{display:block;}
+#box .photo::after{content:"";height:0;display:none;clear: both;}
+ /* 3D部分 */
+#box .cube{float:left;position:relative;}
+#box .cube h3{position:absolute;top:0px;left:30px;width:200px;}
+#box .cube ul{width: 200px;height: 250px;position: absolute;top:100px;left:30px;transform-style: preserve-3d;animation: sport 4s linear 0s infinite normal;}
+#box .cube p{display:none;}
+#box .cube ul li{list-style: none;width: 200px;height: 250px;position: absolute;left: 0;top: 0;background-color: black;transition: all 1s;}
+#box .cube li:nth-child(1){transform: rotateY(90deg) translateZ(100px);}
+#box .cube li:nth-child(2){transform: rotateY(180deg) translateZ(100px);}
+#box .cube li:nth-child(3){transform: rotateY(270deg) translateZ(100px);}
+#box .cube li:nth-child(4){transform: rotateY(0deg) translateZ(100px);}
+#box .cube li img{width: 200px;height: 250px;border: 5px solid skyblue;box-sizing: border-box;}
+#box .cube ul:hover{animation-play-state: paused;}
+#box .cube ul li:nth-child(1):hover{transform: rotateY(90deg) translateZ(150px) scale(1.3);}
+#box .cube ul li:nth-child(2):hover{transform: rotateY(180deg) translateZ(150px) scale(1.3);}
+#box .cube ul li:nth-child(3):hover{transform: rotateY(270deg) translateZ(150px) scale(1.3);}
+#box .cube ul li:nth-child(4):hover{transform: rotateY(0deg) translateZ(150px) scale(1.3);}
+#box .cube ul:hover li img{opacity: 0.5;}
+#box .cube ul li:hover p{display:block;}
+#box .cube ul li:hover img{opacity: 1;}
+@keyframes sport {
+		from{
+				transform: rotateX(-10deg) rotateY(0deg);
+		}
+		to{
+				transform: rotateX(-10deg) rotateY(360deg);
+		}
+	}

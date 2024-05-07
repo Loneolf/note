@@ -1,0 +1,67 @@
+/** @format */
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.m-advert-barrage-box {
+	position: absolute;
+	width: 100%;
+	// height: 200px;
+	top: 20px;
+	z-index: 0;
+	overflow: hidden;
+	// background-color: #ccc;
+	.lineBox {
+		margin-top: 20px;
+		white-space: nowrap;
+		width: fit-content;
+		position: relative;
+		height: 22px;
+		.barrage-item {
+			border: 1px solid #e9b270;
+			border-radius: 11px;
+			align-items: center;
+			justify-content: center;
+			background-color: #574945;
+			color: #fff2d7;
+			display: inline-flex;
+			height: 22px;
+			line-height: 22px;
+			padding: 0 10px;
+			.emoImg {
+				height: 16px;
+				margin-left: 4px;
+				width: 16px;
+			}
+
+			.barrage-text {
+				font-size: 12px;
+				font-weight: 400;
+				height: 22px;
+				line-height: 22px;
+			}
+		}
+		.animationItem{
+			margin-right: 50px;
+		}
+		.calculateItem{
+			position: absolute;
+			left: 0;
+		}
+	}
+	.animationLine{
+		transform: translateX(calc(100vw + 10px));
+		animation: trans 10s linear 0s infinite paused ;
+	}
+}
+
+@keyframes trans {
+	0% {
+		transform: translateX(calc(100vw + 10px));
+	}
+
+	100% {
+		transform: translateX(-100%);
+	}
+}

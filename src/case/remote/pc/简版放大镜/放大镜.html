@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        li{list-style: none;}
+        body{background:pink;}
+        img{vertical-align:bottom;}
+        #mid{width:350px;height:350px;border:1px solid #ccc;margin:100px 0 0 100px;position:relative;}
+        #mid>img{width:350px;height:350px;}
+        #mid>span{position:absolute;left:0;top:0;height:100px;width:100px;background:rgba(255,255,0,0.4);cursor:move;display:none;}
+        #mid #big{width:500px;height:500px;overflow:hidden;position:absolute;left:360px;top:0;border:1px solid #ccc;display:none;}
+        #mid #big>img{position:absolute;top:0;left:0;}
+        #little{margin:10px 0 0 100px;overflow: hidden;}
+        #little ul li{float:left;margin-right: 10px;}
+    </style>
+</head>
+<body>
+<div id="mid">
+    <img src="img/pic002.jpg" alt="">
+    <span></span>
+    <div id = "big">
+        <img src="img/pic02.jpg" alt="">
+    </div>
+</div>
+<div id="little">
+    <ul>
+        <li><img src="img/pic0002.jpg" alt=""></li>
+    </ul>
+</div>
+</body>
+<script>
+    var mid,big,midImg,bigImg,span
+    init()
+    function init(){
+        big = document.getElementById("big");
+        mid = document.getElementById("mid")
+        midImg=mid.firstElementChild
+        bigImg=big.firstElementChild
+        span=midImg.nextElementSibling
+        mid.addEventListener("mousemove",moveHandler,true)
+        mid.addEventListener("mouseleave",moveHandler)
+
+    }
+    function moveHandler(e){
+        e.stopPropagation()
+        e.preventDefault()
+        span.style.display = 'block';
+        big.style.display = 'block';
+        if(e.type==="mousemove"){
+            var X = e.clientX - this.offsetLeft - span.offsetWidth*0.5;
+            var Y = e.clientY - this.offsetTop - span.offsetHeight*0.5;
+            if(X<0){
+                X = 0
+            }else if(X > this.offsetWidth - span.offsetWidth){
+                X = this.offsetWidth - span.offsetWidth;
+            }
+            if(Y<0){
+                Y = 0
+            }else if(Y > this.offsetHeight - span.offsetHeight){
+                Y = this.offsetHeight - span.offsetHeight;
+            }
+            span.style.left = X +"px";
+            span.style.top = Y +"px";
+            bigImg.style.left = -X/((this.offsetWidth-span.offsetWidth)/(bigImg.offsetWidth-big.offsetWidth))+"px";
+            bigImg.style.top =  -Y/((this.offsetHeight-span.offsetHeight)/(bigImg.offsetHeight-big.offsetHeight))+"px";
+        }
+        if(e.type==="mouseleave"){
+            span.style.display = 'none';
+            big.style.display = 'none';
+//            mid.removeEventListener("mousemove",moveHandler)
+//            mid.removeEventListener("mouseleave",moveHandler)
+        }
+    }
+</script>
+</html>

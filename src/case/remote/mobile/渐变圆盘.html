@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .mycanvas {
+          width: 231px;
+          height: 231px;
+          color: #1dbdc4;
+          color: #ebeff0;
+      }
+  </style>
+</head>
+
+<body>
+    <input id="input" value="80" /><button id="btn">确定</button>
+    <p>输入角度即可画出对应的半圆，范围为0~180</p>
+    <canvas id="mycanvas" class="mycanvas" width="462" height="462"></canvas>
+</body>
+
+<script>
+    const x0 = 231 / 2 * 2 // 圆心坐标
+    const y0 = 231 / 2 * 2 // 圆心坐标
+    const r1 = (231 / 2 - 16) * 2 // 外圆半径
+    const r2 = (231 / 2 - 25) * 2 // 内圆半径
+    const startAng = 180 // 起始角度
+    const endAng = 0 // 终点角度
+    let canvas = document.getElementById('mycanvas');
+    let ctx = canvas.getContext("2d");
+    drawBg(ctx, endAng)
+
+    // 获取大圆上的点 与 边界圆交点
+    let x1 = getPointX(r1, startAng)
+    let y1 = getPointY(r1, startAng)
+    ctx.moveTo(x1, y1)
+    let temp = startAng
+
+    animDraw(ctx, temp, Number(input.value) + 180)
+    btn.onclick = () => {
+        console.log('aaa233')
+        ctx.clearRect(0,0, canvas.width, canvas.height)
+        drawBg(ctx, endAng)
+        animDraw(ctx, temp, Number(input.value) + 180)
+    }
+
+    function drawBg(ctx, endAng) {
+        ctx.beginPath();
+        ctx.arc(x0, y0, r1, (Math.PI / 180) * startAng, (Math.PI / 180) * endAng, false);
+        ctx.lineCap = "round";
+        ctx.lineWidth = '20';
+        ctx.strokeStyle = '#ebeff0';
+        ctx.stroke();
+    }
+
+    function drawColorArc(ctx, endAng) {
+        ctx.beginPath();
+        ctx.arc(x0, y0, r1, (Math.PI / 180) * startAng, (Math.PI / 180) * endAng, false);
+        ctx.lineCap = "round";
+        ctx.lineWidth = '20';
+        ctx.strokeStyle = '#1dbdc4';
+        ctx.stroke();
+    }
+
+    function animDraw(ctx, temp, drawDeg) {
+        console.log(drawDeg)
+        temp+=1
+        if (temp < drawDeg) {
+            window.requestAnimationFrame(() => {
+                return animDraw(ctx, temp, drawDeg)
+            });
+        }
+        drawColorArc(ctx, temp)
+    }
+
+    function getPointX(r, ao) {
+        return x0   +   r   *   Math.cos(ao   *  Math.PI   /180   ) 
+
+    }
+    function getPointY(r,ao) {
+        return y0   +   r   *   Math.sin(ao   *   Math.PI  /180   )  
+    }
+</script>
+</html>

@@ -1,0 +1,112 @@
+// npx sass --watch css/index.scss:css/index.css --no-source-map
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,body,.box{
+    width: 100%;
+    height: 100%;
+    font-size: .18rem;
+}
+.box{
+    position: relative;
+    padding: .1rem 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding-right: 0;
+    .content{
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        line-height: .44rem;
+        position: relative;
+        .title, .fixtitle{
+            background-color: #f4f4f4;
+            padding-left: .15rem;
+            // position: sticky;
+            top: 0;
+        }
+        .fixtitle{
+            position: fixed;
+            top: .1rem;
+            width: 100%;
+            display: none;
+            z-index: 8;
+        }
+        .item{
+            padding-left: .15rem;
+            position: relative;
+            font-size: .16rem;
+        }
+        .item::after{
+            position: absolute;
+            box-sizing: border-box;
+            content: ' ';
+            pointer-events: none;
+            right: 16px;
+            bottom: 0;
+            left: 16px;
+            border-bottom: 1px solid #ebedf0;
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+        }
+    }
+    .indexbox{
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding-right: .06rem;
+        padding-left: .04rem;
+        height: 100%;
+        color: #919191;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: .14rem;
+        background-color: #fff;
+        z-index: 9;
+        .tipbox{
+            position: absolute;
+            top: 0;
+            right: .3rem;
+            opacity: 0;
+            transition: opacity .2s;
+            .tipContent{
+                width: .3rem;
+                height: .3rem;
+                background-color: #919191;
+                line-height: .3rem;
+                text-align: center;
+                color: #fff;
+                font-size: .18rem;
+                border-radius: 50%;
+                position: relative;
+                z-index: 999;
+            }
+            .tipArr{
+                position: absolute;
+                right: -.07rem;
+                top: .05rem;
+                width: 0;
+                height: 0;
+                border-top: .1rem solid transparent;
+                border-bottom: .1rem solid transparent;
+                border-left: .1rem solid #919191;
+            }
+        }
+        .indexItem{
+            width: .18rem;
+            height: .18rem;
+            text-align: center;
+            line-height: .18rem;
+        }
+        .activeIndex{
+            background-color: red;
+            border-radius: 10px;
+            color: #fff;
+        }
+    }
+}

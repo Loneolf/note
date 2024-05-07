@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>路径</title>
+  <style>
+    .dia{width:100px;height:100px;position:absolute;}
+    .diaA{top:100px;left:100px;background: green;}
+    .diaB{top:400px;left:400px;background: yellow;}
+    .line{position: absolute;background:#ccc;z-index: -1;}
+    .lineX{height:5px;}
+    .lineY{width:5px;}
+  </style>
+</head>
+<body>
+  <div id='diaA' class='dia diaA'>
+    A点
+    <div id='lineX' class='line lineX'></div>
+  </div>
+  <div id='diaB' class='dia diaB'>
+    B点
+    <div id='lineY' class='line lineY'></div>
+  </div>
+  <script>
+
+    let diaA = document.querySelector('#diaA')
+    let diaB = document.querySelector('#diaB')
+    let lineX = document.querySelector('#lineX')
+    let lineY = document.querySelector('#lineY')
+    let body = document.querySelector('body')
+    diaA.addEventListener('mousedown',moveMouseHandler,true)
+    diaB.addEventListener('mousedown',moveMouseHandler,true)
+    position()
+
+    function position(){
+      let regA = diaA.getBoundingClientRect()
+      let regB = diaB.getBoundingClientRect()
+      let width = regA.x - regB.x
+      let height = regA.y - regB.y
+      lineX.style.width = Math.abs(width) + 'px'
+      lineY.style.height = Math.abs(height) + 'px'
+      lineX.style.top = 50+'px'
+      lineY.style.left = 50+'px'
+      console.log(regA.y,regB.y,width,height)
+      if(regA.x > regB.x){
+        lineX.style.left = - width + 50 +'px'
+      } else{
+        lineX.style.left = 50+'px'
+      }
+      if(regA.y > regB.y){
+        lineY.style.top = 50 +'px'
+      } else {
+        lineY.style.top = height + 50 +'px'
+      }
+    }
+
+    function moveMouseHandler(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.type === "mousedown") {
+        body.removeChild(this)
+        body.appendChild(this)
+        document.addEventListener("mousemove", moveMouseHandler);
+        document.position = { x: e.offsetX, y: e.offsetY };
+        document.elem = this;
+        this.addEventListener("mouseup", moveMouseHandler);
+      }
+      if (e.type === "mousemove") {
+        position()
+        this.elem.style.left = e.x - this.position.x + "px";
+        this.elem.style.top = e.y - this.position.y + "px";
+      }
+      if (e.type === "mouseup") {
+        document.position = null;
+        document.elem = null;
+        document.removeEventListener("mousemove", moveMouseHandler);
+        this.removeEventListener("mouseup", moveMouseHandler);
+      }
+    }
+  </script>
+</body>
+</html>

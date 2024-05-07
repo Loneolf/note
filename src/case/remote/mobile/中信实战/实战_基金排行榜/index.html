@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>基金排行</title>
+
+	<!-- <meta name="apple-touch-fullscreen" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Cache-Control" content="no-siteapp">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+	<link rel="stylesheet" href="../lib/base-min.css">
+	<link rel="stylesheet" href="../lib//helloLoading.css">
+	<link rel="stylesheet" href="../lib/vant/index@2.12.css">
+	<link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body maidian="click">
+	<div class="__hello" id="__hello">
+		<div class="__hello_logo_box">
+			<div class="__hello_logo"></div>
+			<div class="__hello_mask"></div>
+		</div>
+	</div>
+	<div class="container" id="container">
+		<div class="topTabs border-bottom-e7">
+			<van-tabs @click="mutualChange" >
+				<van-tab class="submutualWrap" v-for="(item, index) in mutualType" :title="item.name" :key="item.name">
+					<div class="subMutBox" ref="subMut">
+						<span 
+							v-for="(si, sindex) in item.mutual_second_type" 
+							@click="secondMutual(index, sindex)"
+							class="submutItem"
+							:class="item.activeSi === sindex ? 'activeSi' : ''"
+							:key="si.name"
+						>{{si.name}}</span>
+						<span class="spaceSpan"></span>
+					</div>
+				</van-tab>
+			</van-tabs>
+			<div class="filterBox" @click="openShowFilter">
+				<span class="filterBg"></span>
+                <span class="filterBoxIcon" :class="hasFilterItem ? 'activeFilterIcon' : ''"></span>
+				<span class="filterText">筛选</span>
+            </div>
+			<div v-if="mutualTypeSelect !== 3" class="listTitle">
+				<span class="fundName">基金名称</span>
+				<span class="fundValue">净值</span>
+				<van-dropdown-menu>
+					<span class="iconfont iconfont-down">&#xe510;</span>
+					<van-dropdown-item v-model="incomePeriod" :options="timeList" @change="incomePeriodChange"/>
+				</van-dropdown-menu>
+			</div>
+			<!-- 货币型基金的列表额外处理 -->
+			<div v-if="mutualTypeSelect === 3" class="listTitle">
+				<span class="fundName">基金名称</span>
+				<span class="fundValue">万份收益</span>
+				<span class="fundrate">七日年化</span>
+			</div>
+		</div>
+
+		<div class="listContent">
+			<div 
+				v-for="(item, index) in seachCondition"
+				v-show="index === mutualTypeSelect"
+				class="listItem" 
+				:key="index"
+				ref="listItem"
+			>
+				<div class="listBox">
+					<van-pull-refresh
+						v-model="item.isLoading"
+						success-text="加载成功"
+						@refresh="loadData('init')"
+					>
+						<van-list
+							v-model="item.isLoadmore"
+							:finished="item.finished"
+							:finished-text="item.finished && item.dataList.length ? '没有更多了' : ''"
+							@load="loadData"
+						>
+							<div 
+								class="fundItem border-bottom-e7" 
+								v-for="(item, i) in item.dataList" 
+								@click="goDetail(item.product_code, item.product_name)"
+								:key="item.product_code"
+							>
+								<div class="itemLeft">
+									<span class="itemName">{{item.product_name}}</span>
+									<span class="itemCode">{{item.product_code}}</span>
+								</div>
+								<div class="itemmiddle">
+									<span class="netValue">{{item.showValue}}</span>
+									<span class="rateDate">{{item.time}}</span>
+								</div>
+								<div class="incomeRate" :class="item.rateData.className">{{item.rateData.dealRate}}</div>
+							</div>
+						</van-list>
+					</van-pull-refresh>
+				</div>
+				<div class="noneData" v-if="item && !item.dataList.length && !item.isRequest">
+					<img src="./images/kong.png" alt="">
+					<p>暂时没有基金满足此类筛选条件哦还请试试其他筛选</p>
+				</div>
+			</div>
+		</div>
+		<!-- 筛选pop -->
+		<van-popup v-model="showFilter" position="right" get-container="body" @click-overlay="popUpClose">
+			<div v-show="popType === 'normal'" class="normalPop">
+				<div class="filterConditionBox">
+					<div class="filterItem" v-for="(item, index) in filterCondition">
+						<div class="titleBox">
+							<div class="filterTitle">{{item.title}}</div>
+							<span 
+								class="titleMore" 
+								v-if="item.rightContent"
+								@click="setOtherPop(item.title)"
+							>
+								{{item.rightContent}}
+								<span class="iconfont iconfont-right">&#xe510;</span>
+							</span>
+						</div>
+						<div class="itemBox">
+							<span 
+								class="filterContition" 
+								v-for="si in item.content"
+								:class="item.select.name === si.name ? 'selectfilterCondition' : ''"
+								@click="setCondition(index, si)"
+							>{{si.name}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="filterBtnBox">
+					<span class="border-top-e7 resetFilter" @click="resetFilter">重置</span>
+					<span class="filterOk" @click="filterLoaderData">查看基金</span>
+				</div>
+			</div>
+			<!-- 基金公司基金主题筛选 -->
+			<div v-show="popType === 'other'" class="otherPop">
+				<div class="otherTitle">
+					<span class="iconfont iconfont-left" @click="setOtherPop('back')">&#xe510;</span>
+					<h4>{{otherPopType}}</h4>
+				</div>
+				<div class="otherPopContent">
+					<van-index-bar :index-list="otherPopContent[otherPopType+'_index']">
+						<div v-for="(item, index) in otherPopContent[otherPopType]">
+							<van-index-anchor v-if="item.py" :index="item.py">{{item.py}}</van-index-anchor>
+							<van-cell 
+								v-for="si in item.items" 
+								:title="si.name"  
+								@click="fundItemClick(si)" 
+								:class="fundActiveItem(si.name)"
+								:icon="fundActiveItem(si.name) ? 'success': ''"
+							/>
+						</div>
+					</van-index-bar>
+				</div>
+			</div>
+		</van-popup>
+	</div>
+	<script src="../lib/remFlex.js"></script>
+	<script type="text/javascript" src="../lib/vue.min.js"></script>
+	<script type="text/javascript" src="../lib/vant/vant@2.12.min.js"></script>
+	<script type="text/javascript" src="../lib/sea.js"></script>
+	<!-- <script type="text/javascript" src="/z_modules/vconsole.min.js"></script> -->
+
+	<script type="text/javascript">
+		// var vConsole = new VConsole();
+		seajs.use('./js/index.js', function(exports) {
+			exports.init();
+		});
+	</script>
+</body>
+
+</html>

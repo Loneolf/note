@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>googleDrive</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    li{
+      list-style: none;
+    }
+    .app{
+      margin:20px;
+      display: flex;
+      height: auto;
+      min-height: 500px;
+      min-width: 700px;
+    }
+    .left{
+      border-right: 1px solid #ccc;
+      padding:10px;
+      width: 150px;
+    }
+    .menu li{
+      margin-bottom: 15px;
+    }
+    .mainContent{
+      margin: 0 50px 20px;
+      flex:1;
+      display: flex;
+      flex-wrap: wrap;
+      align-content:flex-start
+    }
+    .mainContent li{
+      min-width: 200px;
+      /* max-width: 300px; */
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      border:1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class='app'>
+    <div class='left'>
+      <ul class='menu'>
+        <li>My Drive</li>
+        <li>Shared with me</li>
+        <li>Recent</li>
+        <li>Starred</li>
+      </ul>
+    </div>
+    <ul class='mainContent'>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+      <li>我是文件夹</li>
+    </ul>
+
+  </div>
+  <script>
+    let ul = document.querySelector('.mainContent')
+    let liArr = ul.children
+    // 首次加载执行一次改变li标签函数
+    changeLiWidth(liArr,ul.offsetWidth)
+    // 添加窗口变化监听函数
+    window.addEventListener('resize', resizeHandle);
+
+    function resizeHandle(e){
+      changeLiWidth(liArr,ul.offsetWidth)
+    }
+
+    function changeLiWidth(arr,width){
+      let n = parseInt(width / 212) // 每个文件夹标签最小宽度200+border:2px+margin:10px
+      for (let i = 0; i < arr.length; i++) {
+        // 减去13是包含margin10px，border：2px，以及四舍五入可能多出来的1像素
+        arr[i].style.width = parseInt(width / n -13) + 'px'
+      }
+    }
+  </script>
+</body>
+</html>
