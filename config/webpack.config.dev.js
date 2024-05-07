@@ -10,6 +10,7 @@ module.exports = {
 		chunkFilename: "js/[name].chunk.js",
 		assetModuleFilename: "[name].[ext]", // images/test.png
 	},
+	// cache: true,
 	mode: "development",
 	devtool: "cheap-module-source-map",
 	plugins: [

@@ -1,6 +1,8 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const webpack = require('webpack');
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 
 
 module.exports = {
@@ -8,6 +10,13 @@ module.exports = {
 	plugins: [
 		new HTMLWebpackPlugin({
 			template: path.resolve(__dirname, "../public/index.html"), // 以该文件为模板生成HTML
+		}),
+		new webpack.DllReferencePlugin({
+			manifest: path.resolve(__dirname, "../public/dll/manifest.json"),
+		}),
+		new AddAssetHtmlPlugin({
+			filepath: path.resolve(__dirname, "../public/dll/vendor.js"),
+			publicPath: "./",
 		}),
 		new ESLintPlugin({
 			context: path.resolve(__dirname, "../src"),

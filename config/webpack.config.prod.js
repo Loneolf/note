@@ -9,7 +9,13 @@ module.exports = {
 		path: path.resolve(__dirname, "../docs"),
 		clean: true,
 		filename: "js/[name]_[contenthash:10].js",
-		chunkFilename: "js/[name].chunk.js",
+		chunkFilename: (pathData) => {
+			// console.log('aaaa', pathData)
+			if (!pathData.chunk.name) {
+				return "js/md/[id].js"
+			}
+			return "js/[name].chunk.js"
+		},
 		assetModuleFilename: "asset/[name]_[contenthash:10][ext]", // images/test.png
 	},
 	mode: "production", // development | production

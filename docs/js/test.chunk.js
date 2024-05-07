@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksource_map=self.webpackChunksource_map||[]).push([[43],{50212:(e,s,a)=>{a.r(s),a.d(s,{default:()=>t});var c=a(85893),n=a(67294);function t(){(0,n.useEffect)((function(){}),[]);return(0,c.jsx)("div",{className:"toolsWrap contentWrap",children:(0,c.jsx)("div",{className:"mobileContent content",children:(0,c.jsx)("div",{className:"mobileframebox"})})})}}}]);
-//# sourceMappingURL=test.chunk.js.map
