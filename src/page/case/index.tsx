@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, Drawer, Popover, Button, message  } from "antd";
+import { Menu, Drawer, Popover, Button, message, Alert } from "antd";
 import type { MenuProps } from "antd";
+import Marquee from 'react-fast-marquee';
 import Split from '@c/split'
 import { frameAddTouch, generateQR } from '@u/util'
 import { caseConfig } from './dealCaseData'
@@ -34,7 +35,7 @@ export default function Case() {
 		}
 	}, [])
 
-	function finddIntro(url:string) {
+	function finddIntro(url: string) {
 		let currenItem = caseConfig.find((item)=> item.key === url)
 		if (!currenItem) return
 		return caseIntrol[currenItem?.label as '拖动录制']
@@ -63,6 +64,18 @@ export default function Case() {
 			<Split leftDom={leftDom!} leftPostion={300} />
 			<div className={`${isMobileFrame ? "mobileContent" : ""} content`}>
 				<div className="operateBox">
+					{
+						introItem?.tip && <Alert
+							className="caseAlert"
+							banner
+							message={
+							<Marquee delay={3} pauseOnHover gradient={false}>
+								{introItem.tip}
+							</Marquee>
+							}
+						/>
+					}
+				
 					{
 						!isMobileFrame && <>
 							<Button type="primary" onClick={() => frame.current?.requestFullscreen()}>全屏</Button>
@@ -93,13 +106,19 @@ export default function Case() {
 				)}
 			</div>
 			<Drawer
-				title="Basic Drawer"
+				title={introItem?.title}
 				onClose={() => setOpen(false)}
 				open={open}
+				className="caseDrawer"
 			>
-				<p>Some contents...</p>
-				<p>Some contents...</p>
-				<p>Some contents...</p>
+				{
+					introItem?.intro.map((si)=> {
+						if (si.startsWith('title:')) {
+							return <div className="titleIntrotitle" key={si}>{si.replace('title:', '')}</div>
+						}
+						return <p className="introItem" key={si}>{si}</p>
+					})
+				}
 			</Drawer>
 		</div>
 	);

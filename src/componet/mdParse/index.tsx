@@ -45,8 +45,14 @@ export default function MdParse({ sourceSrc, isShowBackTop = true, isShowAside =
 
 	useEffect(() => {
 		if (!sourceSrc) return;
+		console.log(sourceSrc)
+		// fetch(`@m/${sourceSrc}`).then((res: Response)=> {
+		// 	console.log(res)
+		// })
+		// return
 		// 加载MD数据，并对代码块部分做处理，因为从有道云笔记导出的MD文档代码块不含有“JS”等语言标记，使用正则加
 		import(`@m/${sourceSrc}`).then((res) => {
+			console.log('aaaa2333res', res)
 			let text = res.default.replace(/```/g, (match: string, index: number, str: string) => {
 				// 获取匹配的 ``` 之前的部分和之后的部分
 				const before = str.slice(0, index);

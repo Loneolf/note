@@ -1,4 +1,5 @@
 /node_modules
 myConfig*
-# /docs
+/docs
+/docs/*
 # /dist

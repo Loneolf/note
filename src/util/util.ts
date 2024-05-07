@@ -50,7 +50,7 @@ export const generateQR = async (text: string) => {
 		margin: 1,
 	  };
 	  const png = await QRCode.toDataURL(text, opts);
-	  console.log(png);
+	//   console.log(png);
 	  return png;
 	} catch (err) {
 	  console.error(err);

@@ -18,7 +18,9 @@ export const caseIntrol: tcaseIntrol = {
     "拖动录制": {
         "title": "拖动录制",
         "intro": [
-
+            "鼠标可以拖动方块，运动过程中记录方块的轨迹",
+            "当松开方块时，将会按照记录的轨迹再次模拟方块的运动",
+            "事件学习练习作品"
         ]
     },
     "轮播图": {
@@ -35,19 +37,28 @@ export const caseIntrol: tcaseIntrol = {
     },
     "瀑布流": {
         "title": "瀑布流",
-        "intro": []
+        "intro": [
+            "经典瀑布流练习"
+        ]
     },
     "游戏_寻找徐峥": {
         "title": "游戏_寻找徐峥",
-        "intro": []
+        "intro": [
+            "点击徐峥的光头，难度增加"
+        ]
     },
     "图像明暗切换_滑块控制": {
         "title": "图像明暗切换_滑块控制",
-        "intro": []
+        "intro": [
+            "css: filter: grayscale(0/1)练习",
+            "值为0时,原色，值为1时，黑白色"
+        ]
     },
     "旋转照片": {
         "title": "旋转照片",
-        "intro": []
+        "intro": [
+            "css变量练习作品"
+        ]
     },
     "优图驿站首页模仿-大学时期练习作品": {
         "title": "优图驿站首页模仿-大学时期练习作品",
@@ -55,7 +66,9 @@ export const caseIntrol: tcaseIntrol = {
     },
     "openFile": {
         "title": "openFile",
-        "intro": []
+        "intro": [
+            "浏览器读取文件练习，可以通过浏览器进行文件的操作"
+        ]
     },
     "echarts练习": {
         "title": "echarts练习",
@@ -63,15 +76,21 @@ export const caseIntrol: tcaseIntrol = {
     },
     "canvaseElementDrag": {
         "title": "canvaseElementDrag",
-        "intro": []
+        "intro": [
+            "canvas练习，监听鼠标进入的位置，圆圈可以拖动，可以通过滚轮放大"
+        ]
     },
     "Audrey_Hepburn": {
         "title": "Audrey_Hepburn",
-        "intro": []
+        "intro": [
+            "css3练习"
+        ]
     },
     "3D照片旋转": {
         "title": "3D照片旋转",
-        "intro": []
+        "intro": [
+            "css3、动画练习"
+        ]
     },
     "googleDrive弹性布局": {
         "title": "googleDrive弹性布局",
@@ -91,11 +110,15 @@ export const caseIntrol: tcaseIntrol = {
     },
     "定高长列表渲染优化": {
         "title": "定高长列表渲染优化",
-        "intro": []
+        "intro": [
+            '定高长列表渲染优化，监听页面滚动，计算在页面展示的元素'
+        ]
     },
     "星星绘制": {
         "title": "星星绘制",
-        "intro": []
+        "intro": [
+            "canvas练习，绘制星星"
+        ]
     },
     "碰撞检测": {
         "title": "碰撞检测",
@@ -103,11 +126,16 @@ export const caseIntrol: tcaseIntrol = {
     },
     "环形数字": {
         "title": "环形数字",
-        "intro": []
+        "intro": [
+            "输入框输入对应的行列，展示对应的环形数字，算法题练习"
+        ]
     },
     "笛卡尔心形函数": {
         "title": "笛卡尔心形函数",
-        "intro": []
+        "intro": [
+            "追妹子时写着玩的，虽然最后也没追上",
+            "适配了移动端和PC端"
+        ]
     },
     "路径": {
         "title": "路径",
@@ -115,19 +143,31 @@ export const caseIntrol: tcaseIntrol = {
     },
     "通讯录侧边滑动": {
         "title": "通讯录侧边滑动",
-        "intro": []
+        "intro": [
+            "模拟微信的通讯录，使用了'pinyin'库对汉字进行拼音分类和标记"
+        ]
     },
     "弹幕_barrage": {
         "title": "弹幕_barrage",
-        "intro": []
+        "intro": [
+            "写需求抽离出来的案例",
+            "可配置弹道条数，弹幕速度（随机还是固定），弹幕和弹幕之间的距离(随机还是固定)",
+            "移动方式可以是动画animation方式，但是如果循环播放会有大片的空白间距，也可以是通过计算的方式填装弹幕，循环播放连接顺畅"
+        ]
     },
     "实战_基金排行榜": {
         "title": "实战_基金排行榜",
-        "intro": []
+        "intro": [
+            "做的感觉比较有意思的项目，尤其是筛选比较有意思，将前端抽离出来放到案例中"
+        ],
+        "tip": "本案例所有数据均为模拟，无任何接口调用，不涉及到任何数据泄露风险，纯前端页面，移动端项目，建议点击下方的新开页面，用移动端查看效果更佳。  "
     },
     "实战_F2图标练习": {
         "title": "实战_F2图标练习",
-        "intro": []
+        "intro": [
+            "首次使用F2进行图表绘制，将前端抽离出来，模拟数据用作case"
+        ],
+        "tip": "本案例所有数据均为模拟，无任何接口调用，不涉及到任何数据泄露风险，纯前端页面，移动端项目，建议点击下方的新开页面，用移动端查看效果更佳。  "
     },
     "展开收起": {
         "title": "展开收起",
@@ -139,10 +179,14 @@ export const caseIntrol: tcaseIntrol = {
     },
     "拖拽到指定答案位置": {
         "title": "拖拽到指定答案位置",
-        "intro": []
+        "intro": [
+            "首次面试遇到的手写面试题，比较有意思写下来记录一下"
+        ]
     },
     "渐变圆盘": {
         "title": "渐变圆盘",
-        "intro": []
+        "intro": [
+            "canvas实现的渐变曲线"
+        ]
     }
 }
