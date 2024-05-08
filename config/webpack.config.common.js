@@ -12,10 +12,10 @@ module.exports = {
 			template: path.resolve(__dirname, "../public/index.html"), // 以该文件为模板生成HTML
 		}),
 		new webpack.DllReferencePlugin({
-			manifest: path.resolve(__dirname, "../public/dll/manifest.json"),
+			manifest: path.resolve(__dirname, "./dll/manifest.json"),
 		}),
 		new AddAssetHtmlPlugin({
-			filepath: path.resolve(__dirname, "../public/dll/vendor.js"),
+			filepath: path.resolve(__dirname, "./dll/vendor.js"),
 			publicPath: "./",
 		}),
 		new ESLintPlugin({
@@ -44,7 +44,11 @@ module.exports = {
 			{
 				test: /\.tsx?$/,
 				exclude: /node_modules/, // 排除node_modules中的库
-				loader: "ts-loader",
+				use: [
+					// 'cache-loader',
+					'ts-loader'
+				],
+				// loader: "ts-loader",
 			},
 			{
 				test: /\.md$/,

@@ -22,7 +22,7 @@ module.exports = {
   },
   output: {
     filename: "[name].js",
-    path: path.resolve(__dirname, "../public/dll"),
+    path: path.resolve(__dirname, "./dll"),
     library: "[name]_[hash]",
   },
   plugins: [
@@ -31,7 +31,7 @@ module.exports = {
       // 映射关系文件名
       name: "[name]_[hash]",
       // 映射关系表，manifest.json文件
-      path: path.resolve(__dirname, "../public/dll/manifest.json"),
+      path: path.resolve(__dirname, "./dll/manifest.json"),
       context: process.cwd(),
     }),
   ],
