@@ -1,5 +1,7 @@
 const path = require("path");
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const webpack = require('webpack');
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 
 
 module.exports = {
@@ -16,7 +18,14 @@ module.exports = {
 	plugins: [
 		new ReactRefreshWebpackPlugin({
 			overlay: false
-		})
+		}),
+		// new webpack.DllReferencePlugin({
+		// 	manifest: path.resolve(__dirname, "./dll/manifest.json"),
+		// }),
+		// new AddAssetHtmlPlugin({
+		// 	filepath: path.resolve(__dirname, "./dll/vendor.js"),
+		// 	publicPath: "./",
+		// }),
 	],
 	devServer: {
 		client: {

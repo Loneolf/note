@@ -58,7 +58,13 @@
             cursor: pointer;
             /* display: none; */
         }
-
+        .typebtn {
+            border: 1px solid #ccc;
+            background: none;
+        }
+        .btn.active{
+            background-color: red;
+        }
         .text {
             font-size: 14px;
             margin-top: 20px;
@@ -103,10 +109,12 @@
         <textarea id="textarea"></textarea>
     </div>
     <div class="operate">
-        <button class="btn turn" id="turn">转化</button>
+        <button class="btn turn" id="turn">转化</button><br />
+        <button class="btn typebtn" id="pxTurn">px转rem</button><br />
+        <button class="btn typebtn active" id="remTurn">rem转px</button>
         <br />
         <p class="text">基准单位</p>
-        <input type="text" class="unitInput" id="unitInput" value="37.5">
+        <input type="text" class="unitInput" id="unitInput" value="50">
         <div class="usualUse" id="usualUse">
             <span>常用单位: </span>
             <span class="tag">20</span>
@@ -125,18 +133,36 @@
     <script>
         // 匹配px的正则
         const pxRegex = /(\d+)px/g;
+        const remRegex = /(\d*\.?\d+)rem/g;
+        let type = 'rem'
         // 点击转化按钮，转化CSS
         turn.onclick = () => {
             const cssStr = textarea.value
             if (!cssStr) return alert('请输入或粘贴要转化的css')
             const baseFontSize = unitInput.value
             if (!baseFontSize) return alert('请输入或选择基准单位')
-            let remCssString = cssStr.replace(pxRegex, function (match, pixels) {
-                let remValue = (parseInt(pixels) / baseFontSize).toFixed(2);
-                return remValue + 'rem';
+            let remCssString = cssStr.replace(type === 'px' ? pxRegex : remRegex, function (match, pixels) {
+                let remValue = ''
+                if (type === 'px') {
+                    remValue = (parseInt(pixels) / baseFontSize).toFixed(2);
+                } else {
+                    remValue = pixels * baseFontSize;
+                }
+                return remValue + (type === 'rem' ? 'px' : 'rem');
             });
             rightBox.innerText = remCssString
         };
+        pxTurn.onclick = () => {
+            pxTurn.className = 'btn typebtn active'
+            type = 'px'
+            remTurn.className = 'btn typebtn'
+        }
+        remTurn.onclick = () => {
+            remTurn.className = 'btn typebtn active'
+            type = 'rem'
+            pxTurn.className = 'btn typebtn'
+        }
+        
         // 常用单位点击切换
         usualUse.onclick = (e) => {
             if (e.target.className === 'tag') {
@@ -158,3 +184,4 @@
 </body>
 
 </html>
+

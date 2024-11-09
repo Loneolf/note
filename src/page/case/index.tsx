@@ -18,9 +18,9 @@ export default function Case() {
 	const frame = useRef<HTMLIFrameElement>(null)
 
 	const menuClick: MenuProps['onClick'] = function ({ key }) {
-		// console.log('aaaaamenuClick')
 		setFrameSrc(key)
 		setIntroItem(finddIntro(key))
+		console.log('aaaaamenuClick', frame.current, key.includes('mobile'))
 		if (!frame.current || !key.includes('mobile')) return
 		frameAddTouch(frame.current, true)
 	}

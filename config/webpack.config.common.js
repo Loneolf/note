@@ -1,22 +1,13 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
-const webpack = require('webpack');
-const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
-
 
 module.exports = {
 	entry: "./src/main.tsx",
 	plugins: [
 		new HTMLWebpackPlugin({
 			template: path.resolve(__dirname, "../public/index.html"), // 以该文件为模板生成HTML
-		}),
-		new webpack.DllReferencePlugin({
-			manifest: path.resolve(__dirname, "./dll/manifest.json"),
-		}),
-		new AddAssetHtmlPlugin({
-			filepath: path.resolve(__dirname, "./dll/vendor.js"),
-			publicPath: "./",
+			inject: "body",
 		}),
 		new ESLintPlugin({
 			context: path.resolve(__dirname, "../src"),
@@ -87,26 +78,26 @@ module.exports = {
 	optimization: {
 		splitChunks: {
 			chunks: "all",
-			cacheGroups: {
-				 // react相关的一起打包成一个js文件
-				 react: {
-					test: /[\\/]node_modules[\\/]react(.*)?[\\/]/,
-					name: "chunk-react",
-					priority: 40,
-				  },
-				  // antd 单独打包
-				  antd: {
-					test: /[\\/]node_modules[\\/]antd[\\/]/,
-					name: "chunk-antd",
-					priority: 30,
-				  },
-				  // 剩下node_modules单独打包
-				  libs: {
-					test: /[\\/]node_modules[\\/]/,
-					name: "chunk-libs",
-					priority: 20,
-				  },
-			},
+			// cacheGroups: {
+			// 	 // react相关的一起打包成一个js文件
+			// 	 react: {
+			// 		test: /[\\/]node_modules[\\/]react(.*)?[\\/]/,
+			// 		name: "chunk-react",
+			// 		priority: 40,
+			// 	  },
+			// 	  // antd 单独打包
+			// 	  antd: {
+			// 		test: /[\\/]node_modules[\\/]antd[\\/]/,
+			// 		name: "chunk-antd",
+			// 		priority: 30,
+			// 	  },
+			// 	  // 剩下node_modules单独打包
+			// 	  libs: {
+			// 		test: /[\\/]node_modules[\\/]/,
+			// 		name: "chunk-libs",
+			// 		priority: 20,
+			// 	  },
+			// },
 		},
 		runtimeChunk: {
 			name: (entrypoint) => `runtime~${entrypoint.name}`,
