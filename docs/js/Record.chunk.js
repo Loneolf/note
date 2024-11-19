@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksource_map=self.webpackChunksource_map||[]).push([[810],{94015:(e,s,c)=>{c.r(s),c.d(s,{default:()=>r});var u=c(85893),n=c(67294);function r(){return(0,n.useEffect)((function(){}),[]),(0,u.jsxs)("div",{className:"recodeBox",children:[(0,u.jsx)("h3",{children:"网站更新记录"}),(0,u.jsx)("main",{})]})}}}]);
+//# sourceMappingURL=Record.chunk.js.map
