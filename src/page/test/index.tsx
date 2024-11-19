@@ -4,7 +4,6 @@ import "@a/css/contentCom.scss";
 
 export default function Fetch() {
 	useEffect(() => {
-		return;
 		// 接口请求
 		fetch("/api/hello")
 			.then((res) => res.text())

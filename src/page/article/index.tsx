@@ -24,7 +24,8 @@ export default function Artical() {
 		setLeftDome(document.querySelector('.menuWrap')! as HTMLDivElement)
 		setRightDom(document.querySelector('.MDWrap')! as HTMLDivElement)
 	}, [])
-	
+
+	console.log('aaamenuClick', mdPath)
 
 	return (
 		<div className="articleWrap">
