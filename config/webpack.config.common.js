@@ -103,4 +103,7 @@ module.exports = {
 			name: (entrypoint) => `runtime~${entrypoint.name}`,
 		},
 	},
+	stats: {
+        errorDetails: true
+    }
 };

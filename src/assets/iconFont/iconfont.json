@@ -6,6 +6,13 @@
   "description": "个人博客项目图标库",
   "glyphs": [
     {
+      "icon_id": "5993150",
+      "name": "复制",
+      "font_class": "fuzhi",
+      "unicode": "ec7a",
+      "unicode_decimal": 60538
+    },
+    {
       "icon_id": "627566",
       "name": "二维码",
       "font_class": "erweima1",

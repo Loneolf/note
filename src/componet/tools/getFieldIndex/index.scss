@@ -1,0 +1,48 @@
+.getFieldIndexBox{
+    height: 100%;
+    display: flex;
+    .leftBox {
+        width: 36%;
+        min-width: 36%;
+        overflow: auto;
+        padding: 20px;
+        height: 100%;
+        border-right: 2px solid #cccccc;
+        textarea {
+            height: 80%;
+            width: calc(100% - 20px);
+            border: none;
+            resize: none;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: aliceblue;
+        }
+    }
+    .rightBox{
+        flex: 1;
+        height: 100%;
+        overflow: auto;
+        padding: 20px;
+        .item{
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            .iconfont{
+                margin-left: 10px;
+                cursor: pointer;
+                display: none;
+            }
+        }
+        .item:hover{
+           .iconfont{
+                display: block;
+            }
+        }
+        .tip{
+            text-align: center;
+        }
+        .errorTip, .needIndex{
+            color: #ff4d4f;
+        }
+    }
+}
