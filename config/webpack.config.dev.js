@@ -1,3 +1,4 @@
+
 const path = require("path");
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpack = require('webpack');
@@ -14,7 +15,8 @@ module.exports = {
 	},
 	cache: true,
 	mode: "development",
-	devtool: "cheap-module-source-map",
+	// devtool: "cheap-module-source-map",
+	devtool: "source-map",
 	plugins: [
 		new ReactRefreshWebpackPlugin({
 			overlay: false
@@ -69,7 +71,14 @@ module.exports = {
 					{
 						loader: "postcss-loader",
 					},
-					"sass-loader",
+					{
+						loader: 'sass-loader',
+						options: {
+							// Dart Sass 使用现代api，使用下面的配置，sass变异不报错
+							// https://sass.js.cn/documentation/breaking-changes/legacy-js-api/
+							api: 'modern'
+						}
+					}
 				],
 			},
 			// {
