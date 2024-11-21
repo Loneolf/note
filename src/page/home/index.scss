@@ -1,0 +1,35 @@
+.home{
+    margin-top: -74px;
+    position: relative;
+    .imgBgBox{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100vh);
+        z-index: -1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .saying{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        .sayTitle{
+            font-size: 56px;
+            font-weight: bold;
+            text-shadow: 4px 4px 10px var(#ffffff,rgba(0,0,0,.3));
+        }
+        .desc{
+            font-size: 28px;
+        }
+    }
+}
+.pageWrap .title{
+    background-color: rgba(255,255,255,0.3); 
+    backdrop-filter: blur(5px);
+}

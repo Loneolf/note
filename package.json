@@ -15,8 +15,11 @@
     "upLoad": "cross-env upType=doc up=full node ./src/util/upCDN.js",
     "uploadCase": "cross-env upType=case up=increment node ./src/util/upCDN.js",
     "fullUploadCase": "cross-env upType=case up=full node ./src/util/upCDN.js",
+    "uploadBgImg": "cross-env upType=bgimg up=increment node ./src/util/upCDN.js",
+    "fullUploadBgImg": "cross-env upType=bgimg up=full node ./src/util/upCDN.js",
     "readMdFile": "cross-env readFile=md node ./src/util/dealCatalog.js",
     "readCaseFile": "cross-env readFile=case node ./src/util/dealCatalog.js",
+    "readImgBg": "cross-env readFile=bgimg node ./src/util/dealCatalog.js",
     "dll": "webpack --config ./config/webpack.dll.config.js",
     "tsi": "tsc --init"
   },

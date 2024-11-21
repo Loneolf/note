@@ -13,6 +13,12 @@ const config = {
 		outFile: '../page/case/caseRemoteCatalog.js',
 		outName: 'caseCatalog',
 		fileType: '.html'
+	},
+	bgimg: {
+		path: '../assets/bgImg',
+		outFile: '../page/home/bgConfig.js',
+		outName: 'bgImgCatalog',
+		fileType: ['.png', '.jpg', '.jpeg', '.gif', '.webp']
 	}
 }
 
@@ -37,15 +43,23 @@ setTimeout(() => {
 	);
 }, 100);
 
+
+/**
+ * 读取目录下的文件和子目录，并将文件名和目录名处理后存储在 res 数组中
+ * @param {string} directoryPath - 目录路径
+ * @param {Array} res - 存储文件名和目录名的数组
+ */
 function readDirectory(directoryPath, res) {
+	// 使用 fs.readdir 方法读取目录下的文件和子目录
 	fs.readdir(directoryPath, (err, files) => {
 		if (err) {
 			console.error("读取目录失败:", err);
 			return;
 		}
 
-		// 处理目录中的文件和子文件夹
+		// 遍历读取到的文件和子目录
 		files.forEach((file) => {
+			// 使用 path.join 方法拼接文件路径
 			const filePath = path.join(directoryPath, file);
 			fs.stat(filePath, (err, stats) => {
 				if (err) {
@@ -64,12 +78,19 @@ function readDirectory(directoryPath, res) {
 					res.unshift(dirItem);
 					readDirectory(filePath, dirItem.children);
 				} else {
-					//   console.log('aaafile', file, res);
-					file.endsWith(baseConfig.fileType) &&
-						res.push({
-							label: file.replace(baseConfig.fileType, ''),
-							key: file,
+					  console.log('aaafile', file, res);
+					let isPush = false;
+					if (Array.isArray(baseConfig.fileType)) {
+						isPush = baseConfig.fileType.some((item) => {
+							return file.endsWith(item)
 						});
+					} else {
+						isPush = file.endsWith(baseConfig.fileType);
+					}
+					isPush && res.push({
+						label: file.replace(baseConfig.fileType, ''),
+						key: file,
+					});
 				}
 			});
 		});

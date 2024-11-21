@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const COS = require("cos-nodejs-sdk-v5");
-const { COSSECRET, bucket, region, upConfig } = require("./myConfig");
-// const 
+const { COSSECRET, region, upConfig } = require("./myConfig");
 
 const cos = new COS({
 	SecretId: COSSECRET.id,
@@ -10,6 +9,8 @@ const cos = new COS({
 });
 
 const upc = upConfig[process.env?.upType || 'doc']
+
+const bucket = upc.bucket
 // 默认是全量上传
 const isFullUp = process.env?.up || 'full'
 
