@@ -1,0 +1,113 @@
+$recorBgColor: rgba(#bfbfbf,.7);
+
+.recodeBox{
+    padding: 100px 0;
+    box-sizing: border-box;
+    background-image: url(https://img-1258827329.cos.ap-beijing.myqcloud.com/homeBg/1afcdb25fa1848c1a38a7d6c2d033df5.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin-top: -74px;
+    .recodeTitle{
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+    .recodeContent{
+        display: flex;
+        flex-direction: column;
+        min-width: 600px;
+        width: 60%;
+        margin: 0 auto;
+        background-color: rgba(#f0f0f0, .8);
+        border-radius: 16px;
+        padding: 40px 40px 60px;
+        max-width: 1000px;
+        .recodeMainContent{
+            position: relative;
+            .recodeItem{
+                border-left: 6px solid $recorBgColor;
+                color: #262626;
+                position: relative;
+                .timeBox{
+                    font-size: 28px;
+                    height: 58px;
+                    line-height: 58px;
+                    padding-left: 20px;
+                    position: relative;
+                    
+                }
+                .timeBox:hover{
+                    .dotBox .dotIn{
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+                .itemContent{
+                    background-color: $recorBgColor;
+                    border-radius: 14px;
+                    margin: 0 16px;
+                    padding: 10px 20px;
+                    transition: all .4s;
+                    li{
+                        font-size: 20px;
+                        line-height: 30px;
+                    }
+                }
+                .itemContent:hover{
+                    transform: scale(1.02);
+                }
+            }
+            .dotBox{
+                position: absolute;
+                left: -18px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: $recorBgColor;
+                top: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .dotIn{
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: cadetblue;
+                    transition: all .4s;
+                }
+            }
+            .beginDotBox{
+                bottom: -35px;
+                left: -12px;
+                top: inherit;
+            }
+            .lastRecodeItem,.firstRecodeItem{
+                border-color: transparent;
+
+            }
+            .lastRecodeItem::before{
+                content: '';
+                display: block;
+                width: 6px;
+                height: calc(100% - 23px);
+                background-color: $recorBgColor;
+                position: absolute;
+                left: -6px;
+                top: 23px;    
+            }
+            .firstRecodeItem::before{
+                content: '';
+                display: block;
+                width: 6px;
+                height: calc(100% + 23px);
+                background-color: $recorBgColor;
+                position: absolute;
+                left: -6px;
+                top: 0;    
+            }
+        }
+    }
+}

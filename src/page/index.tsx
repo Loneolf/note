@@ -27,7 +27,7 @@ function App() {
 	return (
 		<div className="pageWrap">
 			<header className="title">
-				<Link to='/'><h2>青竹&Loneolf</h2></Link>
+				<Link onClick={() => setActiveLink('/')} to='/'><h2>青竹&Loneolf</h2></Link>
 				<ul className="navList">
 					{RouterConfig.map((item) => {
 						return (
