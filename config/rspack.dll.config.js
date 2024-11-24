@@ -1,5 +1,5 @@
 const path = require("path");
-const webpack = require("webpack");
+const rspack = require('@rspack/core');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: "production",
@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new webpack.DllPlugin({
+    new rspack.DllPlugin({
       // 映射关系文件名
       name: "[name]_[hash]",
       // 映射关系表，manifest.json文件

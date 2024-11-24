@@ -1,8 +1,5 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerWebpakPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const rspack = require("@rspack/core");
 
 module.exports = {
 	output: {
@@ -10,22 +7,21 @@ module.exports = {
 		clean: true,
 		filename: "js/[name]_[contenthash:10].js",
 		chunkFilename: (pathData) => {
-			// console.log('aaaa', pathData)
 			if (!pathData.chunk.name) {
-				return "js/md/[id].js"
+				return "js/md/[id].js";
 			}
-			return "js/[name].chunk.js"
+			return "js/[name].chunk.js";
 		},
 		assetModuleFilename: "asset/[name]_[contenthash:10][ext]", // images/test.png
 	},
 	mode: "production", // development | production
 	devtool: "source-map",
 	plugins: [
-		new MiniCssExtractPlugin({
+		new rspack.CssExtractRspackPlugin({
 			// 默认生成main.css
 			filename: "style/[name]_[contenthash:6].css", // 生成的文件放在dest/style目录下，文件名为hash值
 		}),
-		new CopyPlugin({
+		new rspack.CopyRspackPlugin({
 			patterns: [
 				{
 					from: path.resolve(__dirname, "../public"),
@@ -34,40 +30,50 @@ module.exports = {
 						// 忽略index.html文件
 						ignore: ["**/index.html"],
 					},
-				}
+				},
 			],
 		}),
 	],
 	module: {
 		rules: [
 			{
-				test: /\.(css|scss)$/,
+				test: /\.(css|scss|sass)$/,
+				type: 'javascript/auto',
 				use: [
-					MiniCssExtractPlugin.loader,
+					rspack.CssExtractRspackPlugin.loader,
 					{
 						loader: "css-loader",
-						// options: {
-						// 	modules: {
-						// 		localIdentName:
-						// 			"[name]_[local]_[hash:base64:6]",
-						// 	},
-						// 	importLoaders: 2,
-						// },
 					},
 					{
 						loader: "postcss-loader",
 					},
-					"sass-loader",
+					{
+						loader: "sass-loader",
+						options: {
+							// 同时使用 `modern-compiler` 和 `sass-embedded` 可以显著提升构建性能
+							// 需要 `sass-loader >= 14.2.1`
+							api: "modern-compiler",
+							implementation: require.resolve("sass-embedded"),
+						},
+					},
 				],
 			},
-			// {
-			// 	test: /\.jsx?$/,
-			// 	include: path.resolve(__dirname, "../src"),
-			// 	loader: "babel-loader",
-			// },
 		],
 	},
 	optimization: {
-		minimizer: [new CssMinimizerWebpakPlugin(), new TerserPlugin()],
+		minimizer: [
+			new rspack.SwcJsMinimizerRspackPlugin({
+				minimizerOptions: {
+					format: {
+						comments: false,
+					},
+				},
+			}),
+			new rspack.LightningCssMinimizerRspackPlugin({
+				minimizerOptions: {
+					errorRecovery: false,
+				},
+			}),
+		],
 	},
 };

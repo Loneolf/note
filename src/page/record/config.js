@@ -1,5 +1,11 @@
 export const recordC = [
 	{
+		time: "2024-11-25",
+		desc: [
+			"将项目打包工具webpack更换为rspack",
+		],
+	},
+	{
 		time: "2024-11-23",
 		desc: [
 			"网站更新记录上线",

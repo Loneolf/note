@@ -1,7 +1,7 @@
 const { merge } = require("webpack-merge");
-const commonConfig = require("./webpack.config.common");
-const productionConfig = require("./webpack.config.prod");
-const developmentConfig = require("./webpack.config.dev");
+const commonConfig = require("./rspack.config.common");
+const productionConfig = require("./rspack.config.prod");
+const developmentConfig = require("./rspack.config.dev");
 const fs = require("fs");
 const path = require("path");
 
