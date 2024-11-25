@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksource_map=self.webpackChunksource_map||[]).push([["395"],{16069:function(e,t,n){n.r(t),n.d(t,{default:function(){return a}});var c=n(67294);function a(){return(0,c.useEffect)(function(){fetch("/api/hello").then(function(e){return e.text()}).then(function(e){console.log("aaafetchRes12",e)})},[]),c.createElement("div",{className:"toolsWrap contentWrap"},c.createElement("div",{className:"mobileContent content"},c.createElement("div",{className:"mobileframebox"})))}}}]);
-//# sourceMappingURL=test.chunk.js.map

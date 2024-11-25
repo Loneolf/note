@@ -3,6 +3,7 @@ export const recordC = [
 		time: "2024-11-25",
 		desc: [
 			"将项目打包工具webpack更换为rspack",
+			"打包速度飞起，mac mini M4 启动从10秒到1.3秒，打包也仅仅两三秒，Windows启动从40秒到十秒，巨大的提升，一切优化在这个面前都不值一提"
 		],
 	},
 	{
