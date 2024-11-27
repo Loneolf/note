@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { Spin } from "antd";
 import "./index.scss";
 
@@ -23,7 +23,8 @@ const RouterConfig = [
 ];
 
 function App() {
-	const [activeLink, setActiveLink] = useState("/");
+	const location = useLocation()
+	const [activeLink, setActiveLink] = useState(location.pathname || '/');
 	return (
 		<div className="pageWrap">
 			<header className="title">

@@ -13,6 +13,7 @@
         "import/no-import-module-exports": 0,
         "import/extensions": 0,
         "import/no-extraneous-dependencies": 0,
-        "no-console": 0
+        "no-console": 0,
+        "jsx-a11y/iframe-has-title": 0
     }
 }

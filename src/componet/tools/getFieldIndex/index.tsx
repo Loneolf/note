@@ -9,7 +9,7 @@ type NumberAndStrings = [number,...string[]];
 
 export default function GetFieldIndex() {
 	const [taValue, setTaValue] = useState('')
-	const [tipText, setTipText] = useState('请粘贴要解析的数据')
+	const [tipText, setTipText] = useState('请在左侧输入框粘贴要解析的数据')
 	const [showData, setShowData] = useState([] as NumberAndStrings[])
 	const [messageApi, contextHolder] = message.useMessage();
 

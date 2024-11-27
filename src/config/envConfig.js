@@ -1,1 +1,1 @@
-export const envConfig = {"nodeEnv":"production","buildType":"file"}
+export const envConfig = {"nodeEnv":"development","buildType":"Browser"}
