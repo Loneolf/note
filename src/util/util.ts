@@ -58,22 +58,30 @@ export const generateQR = async (text: string) => {
 	}
 };
 
-export const copyString = function (copyString:string) {
-	if (!copyString) {
-		return message.info({
-			content: '复制内容不能为空',
-			duration: 1,
+export const copyString = async function (copyString:string, noMessage?: boolean) {
+	return new Promise((resolve, reject) => {
+		if (!copyString) {
+			message.info({
+				content: '复制内容不能为空',
+				duration: 1,
+			})
+			reject('无复制内容')
+			return
+		}
+		navigator.clipboard.writeText(copyString).then((res) => {
+			resolve(res)
+			if (noMessage) return 
+			message.success({
+				content: `已复制内容:${copyString}`,
+				duration: 1,
+			})
+		}).catch((err: any) => {
+			reject(err)
+			if (noMessage) return 
+			message.error({
+				content: '复制失败，请检查剪切板权限及浏览器版本',
+				duration: 1,
+			});
 		})
-	}
-	navigator.clipboard.writeText(copyString).then(() => {
-		message.success({
-			content: `已复制内容:${copyString}`,
-			duration: 1,
-		});
-	}).catch(() => {
-		message.error({
-			content: '复制失败，请检查剪切板权限及浏览器版本',
-			duration: 1,
-		});
 	})
 }

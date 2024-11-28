@@ -33,8 +33,6 @@ export default function Tool() {
 		setLeftDome(document.querySelector('.toolsWrap .menuWrap')! as HTMLDivElement)		
 	}, [])
 
-	console.log('AAAACURRENTITEM')
-
 	return (
 		<div className="toolsWrap contentWrap">
 			<div className="menuWrap">
