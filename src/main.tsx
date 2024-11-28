@@ -8,6 +8,9 @@ import {envConfig} from "./config/envConfig";
 import store from "./store";
 import App from "./page";
 import "./assets/css/reset.scss";
+import * as util from './util/util'
+window.util = util
+
 const root = ReactDOM.createRoot(document.querySelector("#app")!);
 root.render(
 	<Provider store={store}>

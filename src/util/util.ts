@@ -1,4 +1,5 @@
-import QRCode, {QRCodeErrorCorrectionLevel, QRCodeDataURLType } from "qrcode";
+import QRCode, { QRCodeErrorCorrectionLevel, QRCodeDataURLType } from "qrcode";
+import { message } from 'antd';
 
 // 节流函数
 export const throttle = (func: Function, delay: number = 1000) => {
@@ -43,16 +44,36 @@ export function frameAddTouch(frameDom: HTMLIFrameElement, isSelect?: boolean) {
 // 传进来url链接生成 image/database的二维码数据
 export const generateQR = async (text: string) => {
 	try {
-	  const opts = {
-		errorCorrectionLevel: 'H' as QRCodeErrorCorrectionLevel,
-		type: "image/png" as QRCodeDataURLType ,
-		quality: 0.9,
-		margin: 1,
-	  };
-	  const png = await QRCode.toDataURL(text, opts);
-	//   console.log(png);
-	  return png;
+		const opts = {
+			errorCorrectionLevel: 'H' as QRCodeErrorCorrectionLevel,
+			type: "image/png" as QRCodeDataURLType,
+			quality: 0.9,
+			margin: 1,
+		};
+		const png = await QRCode.toDataURL(text, opts);
+		//   console.log(png);
+		return png;
 	} catch (err) {
-	  console.error(err);
+		console.error(err);
 	}
-  };
+};
+
+export const copyString = function (copyString:string) {
+	if (!copyString) {
+		return message.info({
+			content: '复制内容不能为空',
+			duration: 1,
+		})
+	}
+	navigator.clipboard.writeText(copyString).then(() => {
+		message.success({
+			content: `已复制内容:${copyString}`,
+			duration: 1,
+		});
+	}).catch(() => {
+		message.error({
+			content: '复制失败，请检查剪切板权限及浏览器版本',
+			duration: 1,
+		});
+	})
+}
