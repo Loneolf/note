@@ -25,12 +25,13 @@ export default function GetFieldIndex() {
 			for (const key in data) {
 				if (tem[0] === 9999) {
 					tem[0] = index
+					tem.push(item)
 				}
 				if (Number(data[key]) === index) {
-					tem.push(`${item}:${key}`)
+					tem.push(`---${key}`)
 				}
 			}
-			if (tem.length === 1) tem.push(`${item}:需补充下标`)
+			if (tem.length === 2) tem.push(`需补充下标`)
 			res.push(tem)
 		});
 		console.log(res.sort((a, b) => {
@@ -86,7 +87,12 @@ export default function GetFieldIndex() {
 					? showData.map((item: NumberAndStrings, index: number) => {
 						return (
 							<p key={index} className="item">
-								{item[0]} ---- <span className={item[1].includes('需补充下标') ? 'needIndex' : ''}>{item[1]}</span>
+								{item[0]} ---- {item.map((si: string|number, sindex) => {
+									if (sindex < 1) return null
+									return (
+										<span key={sindex} className={(si as string).includes('需补充下标') ? 'needIndex' : ''}>{si} </span>
+									)
+								})}
 								<span onClick={() => copy(item[1])} className="iconfont">&#xec7a;</span>
 							</p>
 						)
