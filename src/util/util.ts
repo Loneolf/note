@@ -27,7 +27,11 @@ export function debounce(func: Function, delay: number) {
 	};
 }
 
-// 给iframe标签加载touch模拟器，是否可选择文本
+/**
+ * 给iframe标签加载touch模拟器，并设置是否可选择文本
+ * @param frameDom - 要加载touch模拟器的iframe元素
+ * @param isSelect - 是否禁止用户选择文本，默认为false
+ */
 export function frameAddTouch(frameDom: HTMLIFrameElement, isSelect?: boolean) {
 	frameDom.onload = function () {
 		const doc = frameDom?.contentDocument || frameDom.contentWindow?.document
@@ -83,5 +87,19 @@ export const copyString = async function (copyString:string, noMessage?: boolean
 				duration: 1,
 			});
 		})
+	})
+}
+
+export const mySort = function (date: {[property: string]: string;}[], rule: string[], sortKey: string = 'key') {
+	return date.sort((a, b) => {
+		for (var i = 0; i < rule.length; i++) {
+			var key = rule[i];
+			if (a[sortKey] === key) {
+				return -1;
+			} else if (b[sortKey] === key) {
+				return 1;
+			}
+		}
+		return 0;
 	})
 }
