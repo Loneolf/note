@@ -32,7 +32,7 @@ setTimeout(() => {
 	console.log("aaamyData", JSON.stringify(mydata));
 	fs.writeFile(
 		path.resolve(__dirname, baseConfig.outFile),
-		`export const ${baseConfig.outName} = ${JSON.stringify(mydata)}`,
+		`export const ${baseConfig.outName} = ${JSON.stringify(mydata, null, 4)}`,
 		(error) => {
 			if (error) {
 				console.log("写入文件错误", error);
