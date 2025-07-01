@@ -69,6 +69,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "antd": "^5.10.3",
+    "cos-js-sdk-v5": "^1.8.6",
     "github-markdown-css": "^5.5.1",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",

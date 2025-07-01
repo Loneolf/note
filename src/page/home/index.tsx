@@ -40,13 +40,13 @@ export default function Fetch() {
     function preloadImages(imageUrls: string[]): Promise<HTMLImageElement[]> {
         let loadedImages: HTMLImageElement[] = [];
         let loadNumber: number = imageUrls.length;
-		console.log('aaaaaloadImg', imageUrls)
+		// console.log('aaaaaloadImg', imageUrls)
         return new Promise((resolve, reject) => {
             imageUrls.forEach((url, index) => {
                 let img: HTMLImageElement = new Image();
-				console.log('loadImg', url)
+				// console.log('loadImg', url)
                 img.onload = function () {
-					console.log('loadImgover', this)
+					// console.log('loadImgover', this)
                     loadedImages[index] = this as HTMLImageElement;
                     loadNumber--;
 

@@ -38,7 +38,7 @@ export default function Case() {
 	function finddIntro(url: string) {
 		let currenItem = caseConfig.find((item)=> item.key === url)
 		if (!currenItem) return
-		return caseIntrol[currenItem?.label as '拖动录制']
+		return caseIntrol[currenItem.label]
 	}
 
 	function openIntroDrawer() {
