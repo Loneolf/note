@@ -69,9 +69,9 @@ export default function Case() {
 							className="caseAlert"
 							banner
 							message={
-							<Marquee delay={3} pauseOnHover gradient={false}>
-								{introItem.tip}
-							</Marquee>
+								<Marquee delay={3} pauseOnHover gradient={false}>
+									{introItem.tip}
+								</Marquee>
 							}
 						/>
 					}
