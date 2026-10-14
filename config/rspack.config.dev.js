@@ -26,17 +26,17 @@ module.exports = {
 		historyApiFallback: true,
 		proxy: [
 			{ // 配置代理
-				// "/api": "http://localhost:9000", // 直接代理
-				"/api": { // 使用对象，可以重写路径
-					target: "http://localhost:9000",
-					// 重写路径
-					pathRewrite: {
-						"^/api":"/test",
-					},
-					// 确保请求主机名是target中的主机名
-					changeOrigin: true
-				}
-			}
+				// Rspack 2 / @rspack/dev-server 2 使用 http-proxy-middleware v4，
+				// 需通过 pathFilter 指定要代理的路径
+				pathFilter: "/api",
+				target: "http://localhost:9000",
+				// 重写路径
+				pathRewrite: {
+					"^/api": "/test",
+				},
+				// 确保请求主机名是target中的主机名
+				changeOrigin: true,
+			},
 		],
 	},
 	module: {
